@@ -173,6 +173,7 @@ import { format } from 'date-fns';
 import LoginPage from "../pages/LoginModal";
 import Image from '../assets/college2.png';
 import Footer from '@/components/header/Footer';
+import { api } from '@/api';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -257,7 +258,7 @@ const SignupPage = () => {
     
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/auth/signup/', {
+      const response = await fetch(`${api}/api/auth/signup/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

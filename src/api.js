@@ -1,0 +1,1 @@
+export const api = "https://gu-backend.onrender.com";

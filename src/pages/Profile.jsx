@@ -295,6 +295,7 @@ import {
 } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { useNavigate } from "react-router-dom"
+import { api } from "@/api"
 // import { toast } from "@/components/ui/use-toast"
 
 export default function ProfilePage() {
@@ -349,7 +350,7 @@ export default function ProfilePage() {
           navi("/signup");
         }
 
-        const response = await fetch("http://127.0.0.1:8000/api/auth/profile/", {
+        const response = await fetch(`${api}/api/auth/profile/`, {
           headers: {
             Authorization: `Bearer ${token}`,
             Accept: "application/json",
@@ -389,7 +390,7 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem("token")
 
-      const response = await fetch("http://127.0.0.1:8000/api/auth/profile/edit/", {
+      const response = await fetch(`${api}/api/auth/profile/edit/`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -427,7 +428,7 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem("token")
 
-      const response = await fetch("http://127.0.0.1:8000/api/auth/mentor/", {
+      const response = await fetch(`${api}/api/auth/mentor/`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -468,7 +469,7 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem("token")
 
-      const response = await fetch("http://127.0.0.1:8000/api/auth/mentee/", {
+      const response = await fetch(`${api}/api/auth/mentee/`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,

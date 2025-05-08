@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import { api } from '@/api';
 
 
 
@@ -29,7 +30,7 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
     setError('');
     
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/auth/login/", {
+      const response = await fetch(`${api}/api/auth/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

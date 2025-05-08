@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X, Check } from "lucide-react";
+import { api } from "@/api";
 
 export default function MentorRegistrationForm() {
   const [expertise, setExpertise] = useState([]);
@@ -55,7 +56,7 @@ export default function MentorRegistrationForm() {
         throw new Error('Authentication token not found. Please login first.');
       }
       
-      const response = await fetch('http://localhost:8000/api/auth/mentor/', {
+      const response = await fetch(`${api}/api/auth/mentor/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

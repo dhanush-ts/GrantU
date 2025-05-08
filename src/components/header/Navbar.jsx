@@ -5,6 +5,7 @@ import LoginPage from "../../pages/LoginModal";
 import { Menu, X, User } from 'lucide-react';
 import MentorRegistrationForm from '../forms/MentorRegister';
 import MenteeRegistrationForm from '../forms/MenteeRegister';
+import { api } from '@/api';
 
 const Navbar = ({userData, setUserData}) => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -28,7 +29,7 @@ const Navbar = ({userData, setUserData}) => {
       if (token) {
         setIsAuthenticated(true);
         try {
-          const response = await fetch("http://127.0.0.1:8000/api/auth/profile/", {
+          const response = await fetch(`${api}/api/auth/profile/`, {
             headers: {
               "Authorization": `Bearer ${token}`,
               "Accept": "application/json"

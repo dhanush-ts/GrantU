@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { api } from "@/api";
 
 export default function MenteeRegistrationForm() {
   const [requirements, setRequirements] = useState("I want to learn");
@@ -81,7 +82,7 @@ export default function MenteeRegistrationForm() {
         throw new Error('Authentication token not found. Please login first.');
       }
       
-      const response = await fetch('http://localhost:8000/api/auth/mentee/', {
+      const response = await fetch(`${api}/api/auth/mentee/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

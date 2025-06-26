@@ -4,7 +4,8 @@ import SignupPage from './pages/SignupPage';
 import Mentee from './pages/MenteePage';
 import Mentor from './pages/MentorPage';
 import Scholarship from './pages/Scholarship';
-
+import About from './pages/static/About';
+import Contact from './pages/static/Contact';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import ProfilePage from './pages/Profile';
@@ -23,6 +24,8 @@ const App = () => {
           <Route path="/mentors" element={<Mentor userData={userData} setUserData={setUserData} />} />
           <Route path="/scholarships" element={<Scholarship />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           {/* <Route path="/login" element={<LoginPage />} /> */}
         </Routes>
       </main>

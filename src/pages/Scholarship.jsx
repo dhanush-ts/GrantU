@@ -109,6 +109,7 @@ import { Badge } from "@/components/ui/badge"
 import { CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import Footer from "@/components/header/Footer"
 
 // Mock data for scholarships
 const scholarshipsData = [
@@ -650,7 +651,10 @@ export default function ScholarshipPage() {
           transform: translateY(0);
         }
       `}</style>
+    <Footer/>
+
     </div>
+
   )
 }
 

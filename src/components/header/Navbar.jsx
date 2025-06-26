@@ -6,6 +6,7 @@ import { Menu, X, User } from 'lucide-react';
 import MentorRegistrationForm from '../forms/MentorRegister';
 import MenteeRegistrationForm from '../forms/MenteeRegister';
 import { api } from '@/api';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({userData, setUserData}) => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -21,6 +22,7 @@ const Navbar = ({userData, setUserData}) => {
 
   const location = useLocation();
   const currentPath = location.pathname;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkAuthStatus = async () => {
@@ -40,7 +42,6 @@ const Navbar = ({userData, setUserData}) => {
           if (response.ok) {
             const data = await response.json();
             setUserData(data);
-            console.log("Fetched user profile:", data);
           } else {
             console.error("Failed to fetch user profile");
             localStorage.removeItem('authToken');
@@ -66,6 +67,7 @@ const Navbar = ({userData, setUserData}) => {
     setIsAuthenticated(false);
     setUserData(null);
     setIsProfileMenuOpen(false);
+    navigate('/');
   };
 
   const toggleMenu = () => {

@@ -103,6 +103,7 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
 
           <div className="flex justify-center">
             <Button
+              type="submit"
               className="w-1/2 bg-blue-600 hover:bg-blue-700 text-white"
               onClick={handleLogin}
             >

@@ -302,7 +302,7 @@ export default function LandingPage({ data }) {
                     <UserRound className="h-5 w-5 text-purple-500" />
                   </div>
                   <h3 className="text-purple-500 text-lg font-semibold mb-2">
-                    <Link to="/signup">Create a profile</Link>
+                    Create a profile
                   </h3>
                   <p className="text-sm text-gray-600">
                     Sign up and build your academic profile to match with scholarships

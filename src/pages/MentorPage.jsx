@@ -101,11 +101,15 @@ export default function MentorPage({ userData }) {
 
       {/* Meet Our Mentors Section */}
       <div className="container mt-10 mx-auto px-4">
-        <h2 className="text-3xl font-bold text-purple-500 text-center mb-2">Meet Our Mentors</h2>
-        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        {/* <h2 className="text-3xl font-bold text-purple-500 text-center mb-2">Meet Our Mentors</h2> */}
+      
+          <p className="font-semibold text-center text-3xl text-gradient bg-gradient-to-r from-purple-200 via-purple-500 to-purple-900 bg-clip-text text-transparent">
+            Meet Our {mentors?.length} Incredible Mentor{mentors?.length === 1 ? '' : 's'}!
+          </p>
+          <p className="text-center text-gray-600 mt-5 mb-12 max-w-2xl mx-auto">
           Our mentors come from diverse backgrounds and have helped students secure millions in scholarship funding.
-        </p>
-          <p className="font-semibold text-lg">We have a total of {mentors?.length} Mentor(s)</p>
+          </p>
+
         {/* Mentors Grid */}
         {loading ? (
           <div className="flex justify-center items-center h-64">
@@ -116,7 +120,7 @@ export default function MentorPage({ userData }) {
             <p className="text-red-500 text-xl">Error: {error}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
             {mentors.map((mentor, index) => (
               <Card
                 key={index}
@@ -131,7 +135,7 @@ export default function MentorPage({ userData }) {
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1">
-                      <h3 className="font-bold text-lg text-gray-800">
+                      <h3 className="font-bold text-lg uppercase text-gray-800">
                         {mentor.First_Name} {mentor.Last_Name}
                       </h3>
                       <p className="text-sm text-gray-600">{mentor.organization_detail || "Mentor"}</p>

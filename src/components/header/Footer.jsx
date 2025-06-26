@@ -14,10 +14,10 @@ const Footer = () => {
             </div>
             
             <div className="flex space-x-6">
-              <a href="#" className="text-sm text-gray-600 hover:text-purple-600">About</a>
+              <a href="/about" className="text-sm text-gray-600 hover:text-purple-600">About</a>
               <a href="#" className="text-sm text-gray-600 hover:text-purple-600">Privacy</a>
               <a href="#" className="text-sm text-gray-600 hover:text-purple-600">Terms</a>
-              <a href="#" className="text-sm text-gray-600 hover:text-purple-600">Contact</a>
+              <a href="/contact" className="text-sm text-gray-600 hover:text-purple-600">Contact</a>
             </div>
           </div>
         </div>

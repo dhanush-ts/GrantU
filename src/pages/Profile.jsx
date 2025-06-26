@@ -777,7 +777,7 @@ export default function ProfilePage() {
                       </p>
                     </CardContent>
                     <CardFooter className="flex justify-center border-t pt-4">
-                      <Button>Become a Mentor</Button>
+                      <Button onClick={() => navi('/mentors')}>Become a Mentor</Button>
                     </CardFooter>
                   </Card>
                 ) : (

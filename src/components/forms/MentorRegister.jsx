@@ -56,7 +56,7 @@ export default function MentorRegistrationForm() {
         throw new Error('Authentication token not found. Please login first.');
       }
       
-      const response = await fetch(`${api}/api/auth/mentor/`, {
+      const response = await fetch(`${api}/api/user/mentor/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

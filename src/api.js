@@ -1,1 +1,1 @@
-export const api = "https://gu-backend.onrender.com";
+export const api = "http://localhost:8000";

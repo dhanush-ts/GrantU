@@ -350,7 +350,7 @@ export default function ProfilePage() {
           navi("/signup");
         }
 
-        const response = await fetch(`${api}/api/auth/profile/`, {
+        const response = await fetch(`${api}/api/user/profile/`, {
           headers: {
             Authorization: `Bearer ${token}`,
             Accept: "application/json",
@@ -390,7 +390,7 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem("token")
 
-      const response = await fetch(`${api}/api/auth/profile/edit/`, {
+      const response = await fetch(`${api}/api/user/profile/edit/`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -428,7 +428,7 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem("token")
 
-      const response = await fetch(`${api}/api/auth/mentor/`, {
+      const response = await fetch(`${api}/api/user/mentor/`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -469,7 +469,7 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem("token")
 
-      const response = await fetch(`${api}/api/auth/mentee/`, {
+      const response = await fetch(`${api}/api/user/mentee/`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,

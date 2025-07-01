@@ -21,7 +21,7 @@ export default function MentorPage({ userData }) {
     const fetchMentors = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`${api}/api/auth/mentors/`)
+        const response = await fetch(`${api}/api/user/mentors/`)
 
         if (!response.ok) {
           throw new Error(`Failed to fetch mentors: ${response.status}`)

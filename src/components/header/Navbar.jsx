@@ -31,7 +31,7 @@ const Navbar = ({userData, setUserData}) => {
       if (token) {
         setIsAuthenticated(true);
         try {
-          const response = await fetch(`${api}/api/auth/profile/`, {
+          const response = await fetch(`${api}/api/user/profile/`, {
             headers: {
               "Authorization": `Bearer ${token}`,
               "Accept": "application/json"

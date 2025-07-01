@@ -8,7 +8,7 @@ export default function StatsSection() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const resp = await fetch(`${api}/api/auth/metrics/`);
+            const resp = await fetch(`${api}/api/user/metrics/`);
             const data = await resp.json();
             setData(data);
           } catch (error) {

@@ -360,9 +360,11 @@ import Image from '../assets/college2.png';
 import Footer from '@/components/header/Footer';
 import { PassField } from '@/constants/PassField';
 import { api } from '@/api';
+import { useAuth } from '@/context/AuthContext';
 
 const SignupPage = ({onOpenLogin}) => {
   const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuth()
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [date, setDate] = useState();
@@ -475,6 +477,7 @@ const SignupPage = ({onOpenLogin}) => {
       }
 
       localStorage.setItem('authToken', data.token); // Save for OTP verify
+      setIsAuthenticated(true)
       navigate('/verify-otp');
     } catch (error) {
       console.error('Signup error:', error);

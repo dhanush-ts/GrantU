@@ -72,61 +72,61 @@
 //   };
 
 //   return (
-//     <div className="min-h-screen bg-gray-100 py-8">
-//       <div className="container  mx-auto px-4">
-//         <div className="flex flex-col max-w-7xl mx-auto md:flex-row gap-6">
+//     <div className="py-8 min-h-screen bg-gray-100">
+//       <div className="container px-4 mx-auto">
+//         <div className="flex flex-col gap-6 mx-auto max-w-7xl md:flex-row">
 //           {/* Left Column: Profile Card */}
 //           <div className="w-full md:w-1/3">
 //             <Card className="shadow-lg">
 //               <CardHeader className="pb-0">
 //                 <div className="flex justify-between items-start">
 //                   <div className="flex flex-col items-center">
-//                     <Avatar className="h-24 w-24">
-//                       <AvatarFallback className="bg-purple-500 text-white text-xl">
+//                     <Avatar className="w-24 h-24">
+//                       <AvatarFallback className="text-xl text-white bg-purple-500">
 //                         {getInitials()}
 //                       </AvatarFallback>
 //                     </Avatar>
 //                     <div className="mt-4 text-center">
 //                       <CardTitle className="text-2xl">{userData.First_Name} {userData.Last_Name}</CardTitle>
-//                       <CardDescription className="text-gray-500 mt-1">
+//                       <CardDescription className="mt-1 text-gray-500">
 //                         {userData.organization_detail}
 //                       </CardDescription>
 //                     </div>
 //                   </div>
 //                   <Button variant="outline" size="icon">
-//                     <Edit className="h-4 w-4" />
+//                     <Edit className="w-4 h-4" />
 //                   </Button>
 //                 </div>
 //               </CardHeader>
 //               <CardContent className="pt-6">
 //                 <div className="space-y-4">
-//                   <div className="flex items-center gap-3">
-//                     <Mail className="h-5 w-5 text-gray-500" />
+//                   <div className="flex gap-3 items-center">
+//                     <Mail className="w-5 h-5 text-gray-500" />
 //                     <span className="text-sm">{userData.Email_Address}</span>
 //                   </div>
-//                   <div className="flex items-center gap-3">
-//                     <Phone className="h-5 w-5 text-gray-500" />
+//                   <div className="flex gap-3 items-center">
+//                     <Phone className="w-5 h-5 text-gray-500" />
 //                     <span className="text-sm">{userData.Phone_Number}</span>
 //                   </div>
-//                   <div className="flex items-center gap-3">
-//                     <MapPin className="h-5 w-5 text-gray-500" />
+//                   <div className="flex gap-3 items-center">
+//                     <MapPin className="w-5 h-5 text-gray-500" />
 //                     <span className="text-sm">{userData.address}, {userData.pincode}</span>
 //                   </div>
-//                   <div className="flex items-center gap-3">
-//                     <Calendar className="h-5 w-5 text-gray-500" />
+//                   <div className="flex gap-3 items-center">
+//                     <Calendar className="w-5 h-5 text-gray-500" />
 //                     <span className="text-sm">{formatDate(userData.DOB)} ({calculateAge(userData.DOB)} years)</span>
 //                   </div>
-//                   <div className="flex items-center gap-3">
-//                     <User className="h-5 w-5 text-gray-500" />
+//                   <div className="flex gap-3 items-center">
+//                     <User className="w-5 h-5 text-gray-500" />
 //                     <span className="text-sm">{userData.Gender}</span>
 //                   </div>
-//                   <div className="flex items-center gap-3">
-//                     <Briefcase className="h-5 w-5 text-gray-500" />
+//                   <div className="flex gap-3 items-center">
+//                     <Briefcase className="w-5 h-5 text-gray-500" />
 //                     <span className="text-sm">{userData.Years_of_Experience} years of experience</span>
 //                   </div>
 //                 </div>
 //               </CardContent>
-//               <CardFooter className="border-t pt-4 flex justify-between">
+//               <CardFooter className="flex justify-between pt-4 border-t">
 //                 <Button variant="outline">Reset Password</Button>
 //                 <Button>Save Changes</Button>
 //               </CardFooter>
@@ -151,29 +151,29 @@
 //                   <CardContent>
 //                     <div className="flex flex-wrap gap-2 mb-6">
 //                       {userData.Expertise.map((skill, index) => (
-//                         <Badge key={index} className="bg-purple-500 hover:bg-purple-600 px-3 py-1">
+//                         <Badge key={index} className="px-3 py-1 bg-purple-500 hover:bg-purple-600">
 //                           {skill}
 //                         </Badge>
 //                       ))}
 //                     </div>
 //                     <div className="mt-4">
-//                       <h3 className="text-lg font-medium mb-2">Experience Summary</h3>
-//                       <div className="bg-gray-50 p-4 rounded-lg">
-//                         <div className="flex items-center gap-2 mb-2">
-//                           <Building className="h-5 w-5 text-gray-500" />
+//                       <h3 className="mb-2 text-lg font-medium">Experience Summary</h3>
+//                       <div className="p-4 bg-gray-50 rounded-lg">
+//                         <div className="flex gap-2 items-center mb-2">
+//                           <Building className="w-5 h-5 text-gray-500" />
 //                           <span className="font-medium">Current Organization:</span>
 //                         </div>
 //                         <p className="ml-7 text-gray-700">{userData.organization_detail}</p>
                         
-//                         <div className="flex items-center gap-2 mt-4 mb-2">
-//                           <Briefcase className="h-5 w-5 text-gray-500" />
+//                         <div className="flex gap-2 items-center mt-4 mb-2">
+//                           <Briefcase className="w-5 h-5 text-gray-500" />
 //                           <span className="font-medium">Years of Experience:</span>
 //                         </div>
 //                         <p className="ml-7 text-gray-700">{userData.Years_of_Experience} years</p>
 //                       </div>
 //                     </div>
 //                   </CardContent>
-//                   <CardFooter className="flex justify-end border-t pt-4">
+//                   <CardFooter className="flex justify-end pt-4 border-t">
 //                     <Button variant="outline">Add Skill</Button>
 //                   </CardFooter>
 //                 </Card>
@@ -188,30 +188,30 @@
 //                   <CardContent>
 //                     <div className="flex flex-wrap gap-2">
 //                       {userData.Field_of_Interest.map((interest, index) => (
-//                         <Badge key={index} variant="outline" className="border-purple-400 text-purple-500 px-3 py-1">
+//                         <Badge key={index} variant="outline" className="px-3 py-1 text-purple-500 border-purple-400">
 //                           {interest}
 //                         </Badge>
 //                       ))}
 //                     </div>
 //                     <div className="mt-8">
-//                       <h3 className="text-lg font-medium mb-3">Suggested Interests</h3>
+//                       <h3 className="mb-3 text-lg font-medium">Suggested Interests</h3>
 //                       <div className="flex flex-wrap gap-2">
-//                         <Badge variant="outline" className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100">
+//                         <Badge variant="outline" className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100">
 //                           Data Analytics
 //                         </Badge>
-//                         <Badge variant="outline" className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100">
+//                         <Badge variant="outline" className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100">
 //                           Python
 //                         </Badge>
-//                         <Badge variant="outline" className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100">
+//                         <Badge variant="outline" className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100">
 //                           Cloud Computing
 //                         </Badge>
-//                         <Badge variant="outline" className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100">
+//                         <Badge variant="outline" className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100">
 //                           Machine Learning
 //                         </Badge>
 //                       </div>
 //                     </div>
 //                   </CardContent>
-//                   <CardFooter className="flex justify-end border-t pt-4">
+//                   <CardFooter className="flex justify-end pt-4 border-t">
 //                     <Button variant="outline">Add Interest</Button>
 //                   </CardFooter>
 //                 </Card>
@@ -224,9 +224,9 @@
 //                     <CardDescription>Your specific learning goals and requirements</CardDescription>
 //                   </CardHeader>
 //                   <CardContent>
-//                     <div className="bg-gray-50 p-4 rounded-lg mb-6">
-//                       <div className="flex items-start gap-2">
-//                         <BookOpen className="h-5 w-5 text-gray-500 mt-1" />
+//                     <div className="p-4 mb-6 bg-gray-50 rounded-lg">
+//                       <div className="flex gap-2 items-start">
+//                         <BookOpen className="mt-1 w-5 h-5 text-gray-500" />
 //                         <div>
 //                           <p className="text-gray-700">{userData.Requirements}</p>
 //                         </div>
@@ -235,7 +235,7 @@
                     
 //                     <div className="space-y-4">
 //                       <h3 className="text-lg font-medium">Recommended Learning Paths</h3>
-//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 //                         <Card className="bg-purple-50 border-purple-100">
 //                           <CardHeader className="pb-2">
 //                             <CardTitle className="text-md">SQL Mastery</CardTitle>
@@ -256,7 +256,7 @@
 //                       </div>
 //                     </div>
 //                   </CardContent>
-//                   <CardFooter className="flex justify-end border-t pt-4">
+//                   <CardFooter className="flex justify-end pt-4 border-t">
 //                     <Button variant="outline">Update Requirements</Button>
 //                   </CardFooter>
 //                 </Card>
@@ -344,7 +344,7 @@ export default function ProfilePage() {
       try {
         setLoading(true)
         // Get token from localStorage or wherever you store it
-        const token = localStorage.getItem("token")
+        const token = localStorage.getItem("authToken")
 
         if(!token){
           navi("/signup");
@@ -388,7 +388,7 @@ export default function ProfilePage() {
   // Update profile (address and pincode)
   const updateProfile = async () => {
     try {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("authToken")
 
       const response = await fetch(`${api}/api/user/profile/edit/`, {
         method: "PATCH",
@@ -426,7 +426,7 @@ export default function ProfilePage() {
   // Update mentor data (expertise, experience, organization)
   const updateMentorData = async () => {
     try {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("authToken")
 
       const response = await fetch(`${api}/api/user/mentor/`, {
         method: "PATCH",
@@ -467,7 +467,7 @@ export default function ProfilePage() {
   // Update mentee data (interests and requirements)
   const updateMenteeData = async () => {
     try {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("authToken")
 
       const response = await fetch(`${api}/api/user/mentee/`, {
         method: "PATCH",
@@ -587,30 +587,30 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="w-12 h-12 rounded-full border-t-2 border-b-2 border-purple-500 animate-spin"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-4 md:py-8">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col max-w-7xl mx-auto md:flex-row gap-4 md:gap-6">
+    <div className="py-4 min-h-screen bg-gray-100 md:py-8">
+      <div className="container px-4 mx-auto">
+        <div className="flex flex-col gap-4 mx-auto max-w-7xl md:flex-row md:gap-6">
           {/* Left Column: Profile Card */}
           <div className="w-full md:w-1/3">
             <Card className="shadow-lg">
               <CardHeader className="pb-0">
                 <div className="flex justify-between items-start">
                   <div className="flex flex-col items-center">
-                    <Avatar className="h-20 w-20 md:h-24 md:w-24">
-                      <AvatarFallback className="bg-purple-500 text-white uppercase text-4xl font-semibold">{getInitials()}</AvatarFallback>
+                    <Avatar className="w-20 h-20 md:h-24 md:w-24">
+                      <AvatarFallback className="text-4xl font-semibold text-white uppercase bg-purple-500">{getInitials()}</AvatarFallback>
                     </Avatar>
                     <div className="mt-4 text-center">
                       <CardTitle className="text-xl uppercase md:text-2xl">
                         {userData.First_Name} {userData.Last_Name}
                       </CardTitle>
-                      <CardDescription className="text-gray-500 mt-1">
+                      <CardDescription className="mt-1 text-gray-500">
                         {userData.organization_detail || "No organization specified"}
                       </CardDescription>
                     </div>
@@ -620,23 +620,23 @@ export default function ProfilePage() {
                     size="icon"
                     onClick={() => setEditMode((prev) => ({ ...prev, profile: !prev.profile }))}
                   >
-                    <Edit className="h-4 w-4" />
+                    <Edit className="w-4 h-4" />
                   </Button>
                 </div>
               </CardHeader>
               <CardContent className="pt-6">
                 <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <Mail className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                  <div className="flex gap-3 items-center">
+                    <Mail className="flex-shrink-0 w-5 h-5 text-gray-500" />
                     <span className="text-sm break-all">{userData.Email_Address}</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                  <div className="flex gap-3 items-center">
+                    <Phone className="flex-shrink-0 w-5 h-5 text-gray-500" />
                     <span className="text-sm">{userData.Phone_Number}</span>
                   </div>
 
                   {editMode.profile ? (
-                    <div className="space-y-3 pt-2">
+                    <div className="pt-2 space-y-3">
                       <div className="space-y-2">
                         <label className="text-sm font-medium">Address</label>
                         <Input
@@ -655,27 +655,27 @@ export default function ProfilePage() {
                       </div>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-3">
-                      <MapPin className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                    <div className="flex gap-3 items-center">
+                      <MapPin className="flex-shrink-0 w-5 h-5 text-gray-500" />
                       <span className="text-sm">
                         {userData.address || "No address specified"}, {userData.pincode || ""}
                       </span>
                     </div>
                   )}
 
-                  <div className="flex items-center gap-3">
-                    <Calendar className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                  <div className="flex gap-3 items-center">
+                    <Calendar className="flex-shrink-0 w-5 h-5 text-gray-500" />
                     <span className="text-sm">
                       {formatDate(userData.DOB)}
                       {calculateAge(userData.DOB) ? ` (${calculateAge(userData.DOB)} years)` : ""}
                     </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <User className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                  <div className="flex gap-3 items-center">
+                    <User className="flex-shrink-0 w-5 h-5 text-gray-500" />
                     <span className="text-sm">{userData.Gender || "Not specified"}</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Briefcase className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                  <div className="flex gap-3 items-center">
+                    <Briefcase className="flex-shrink-0 w-5 h-5 text-gray-500" />
                     <span className="text-sm">
                       {userData.Years_of_Experience
                         ? `${userData.Years_of_Experience} years of experience`
@@ -684,14 +684,14 @@ export default function ProfilePage() {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="border-t pt-4 flex justify-between">
+              <CardFooter className="flex justify-between pt-4 border-t">
                 {editMode.profile ? (
                   <>
                     <Button variant="outline" onClick={() => setEditMode((prev) => ({ ...prev, profile: false }))}>
                       Cancel
                     </Button>
                     <Button onClick={updateProfile}>
-                      <Save className="h-4 w-4 mr-2" />
+                      <Save className="mr-2 w-4 h-4" />
                       Save
                     </Button>
                   </>
@@ -714,7 +714,7 @@ export default function ProfilePage() {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger className="flex items-center">
-                          <Lock className="h-3 w-3 mr-1" />
+                          <Lock className="mr-1 w-3 h-3" />
                           Skills & Expertise
                         </TooltipTrigger>
                         <TooltipContent>
@@ -731,7 +731,7 @@ export default function ProfilePage() {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger className="flex items-center">
-                          <Lock className="h-3 w-3 mr-1" />
+                          <Lock className="mr-1 w-3 h-3" />
                           Interests
                         </TooltipTrigger>
                         <TooltipContent>
@@ -748,7 +748,7 @@ export default function ProfilePage() {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger className="flex items-center">
-                          <Lock className="h-3 w-3 mr-1" />
+                          <Lock className="mr-1 w-3 h-3" />
                           Requirements
                         </TooltipTrigger>
                         <TooltipContent>
@@ -769,20 +769,20 @@ export default function ProfilePage() {
                       <CardTitle>Become a Mentor</CardTitle>
                       <CardDescription>Share your expertise and help others grow</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex flex-col items-center justify-center py-8">
-                      <Lock className="h-16 w-16 text-gray-300 mb-4" />
-                      <p className="text-center text-gray-500 max-w-md">
+                    <CardContent className="flex flex-col justify-center items-center py-8">
+                      <Lock className="mb-4 w-16 h-16 text-gray-300" />
+                      <p className="max-w-md text-center text-gray-500">
                         This section is currently locked. Become a mentor to share your skills and expertise with
                         others.
                       </p>
                     </CardContent>
-                    <CardFooter className="flex justify-center border-t pt-4">
+                    <CardFooter className="flex justify-center pt-4 border-t">
                       <Button onClick={() => navi('/mentors')}>Become a Mentor</Button>
                     </CardFooter>
                   </Card>
                 ) : (
                   <Card>
-                    <CardHeader className="flex flex-row items-start justify-between">
+                    <CardHeader className="flex flex-row justify-between items-start">
                       <div>
                         <CardTitle>Skills & Expertise</CardTitle>
                         <CardDescription>Your professional skills and technical expertise</CardDescription>
@@ -793,7 +793,7 @@ export default function ProfilePage() {
                           size="icon"
                           onClick={() => setEditMode((prev) => ({ ...prev, expertise: true }))}
                         >
-                          <Edit className="h-4 w-4" />
+                          <Edit className="w-4 h-4" />
                         </Button>
                       )}
                     </CardHeader>
@@ -801,12 +801,12 @@ export default function ProfilePage() {
                       {editMode.expertise ? (
                         <div className="space-y-4">
                           <div>
-                            <label className="text-sm font-medium mb-2 block">Skills & Expertise</label>
+                            <label className="block mb-2 text-sm font-medium">Skills & Expertise</label>
                             <div className="flex flex-wrap gap-2 mb-3">
                               {editData.Expertise.map((skill, index) => (
                                 <Badge
                                   key={index}
-                                  className="bg-purple-500 hover:bg-purple-600 px-3 py-1 cursor-pointer"
+                                  className="px-3 py-1 bg-purple-500 cursor-pointer hover:bg-purple-600"
                                   onClick={() => removeSkill(skill)}
                                 >
                                   {skill} ×
@@ -822,7 +822,7 @@ export default function ProfilePage() {
                                 onKeyDown={(e) => e.key === "Enter" && addSkill()}
                               />
                               <Button onClick={addSkill} size="sm">
-                                <Plus className="h-4 w-4 mr-1" /> Add
+                                <Plus className="mr-1 w-4 h-4" /> Add
                               </Button>
                             </div>
                           </div>
@@ -856,7 +856,7 @@ export default function ProfilePage() {
                           <div className="flex flex-wrap gap-2 mb-6">
                             {userData.Expertise &&
                               userData.Expertise.map((skill, index) => (
-                                <Badge key={index} className="bg-purple-500 hover:bg-purple-600 px-3 py-1">
+                                <Badge key={index} className="px-3 py-1 bg-purple-500 hover:bg-purple-600">
                                   {skill}
                                 </Badge>
                               ))}
@@ -865,16 +865,16 @@ export default function ProfilePage() {
                             )}
                           </div>
                           <div className="mt-4">
-                            <h3 className="text-lg font-medium mb-2">Experience Summary</h3>
-                            <div className="bg-gray-50 p-4 rounded-lg">
-                              <div className="flex items-center gap-2 mb-2">
-                                <Building className="h-5 w-5 text-gray-500" />
+                            <h3 className="mb-2 text-lg font-medium">Experience Summary</h3>
+                            <div className="p-4 bg-gray-50 rounded-lg">
+                              <div className="flex gap-2 items-center mb-2">
+                                <Building className="w-5 h-5 text-gray-500" />
                                 <span className="font-medium">Current Organization:</span>
                               </div>
                               <p className="ml-7 text-gray-700">{userData.organization_detail || "Not specified"}</p>
 
-                              <div className="flex items-center gap-2 mt-4 mb-2">
-                                <Briefcase className="h-5 w-5 text-gray-500" />
+                              <div className="flex gap-2 items-center mt-4 mb-2">
+                                <Briefcase className="w-5 h-5 text-gray-500" />
                                 <span className="font-medium">Years of Experience:</span>
                               </div>
                               <p className="ml-7 text-gray-700">
@@ -888,7 +888,7 @@ export default function ProfilePage() {
                       )}
                     </CardContent>
                     {editMode.expertise && (
-                      <CardFooter className="flex justify-between border-t pt-4">
+                      <CardFooter className="flex justify-between pt-4 border-t">
                         <Button
                           variant="outline"
                           onClick={() => setEditMode((prev) => ({ ...prev, expertise: false }))}
@@ -896,7 +896,7 @@ export default function ProfilePage() {
                           Cancel
                         </Button>
                         <Button onClick={updateMentorData}>
-                          <Save className="h-4 w-4 mr-2" />
+                          <Save className="mr-2 w-4 h-4" />
                           Save Changes
                         </Button>
                       </CardFooter>
@@ -912,20 +912,20 @@ export default function ProfilePage() {
                       <CardTitle>Become a Mentee</CardTitle>
                       <CardDescription>Discover new interests and learn from experts</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex flex-col items-center justify-center py-8">
-                      <Lock className="h-16 w-16 text-gray-300 mb-4" />
-                      <p className="text-center text-gray-500 max-w-md">
+                    <CardContent className="flex flex-col justify-center items-center py-8">
+                      <Lock className="mb-4 w-16 h-16 text-gray-300" />
+                      <p className="max-w-md text-center text-gray-500">
                         This section is currently locked. Become a mentee to explore your interests and connect with
                         mentors.
                       </p>
                     </CardContent>
-                    <CardFooter className="flex justify-center border-t pt-4">
+                    <CardFooter className="flex justify-center pt-4 border-t">
                       <Button>Become a Mentee</Button>
                     </CardFooter>
                   </Card>
                 ) : (
                   <Card>
-                    <CardHeader className="flex flex-row items-start justify-between">
+                    <CardHeader className="flex flex-row justify-between items-start">
                       <div>
                         <CardTitle>Fields of Interest</CardTitle>
                         <CardDescription>Areas you're interested in learning and developing</CardDescription>
@@ -936,7 +936,7 @@ export default function ProfilePage() {
                           size="icon"
                           onClick={() => setEditMode((prev) => ({ ...prev, interests: true }))}
                         >
-                          <Edit className="h-4 w-4" />
+                          <Edit className="w-4 h-4" />
                         </Button>
                       )}
                     </CardHeader>
@@ -944,13 +944,13 @@ export default function ProfilePage() {
                       {editMode.interests ? (
                         <div className="space-y-4">
                           <div>
-                            <label className="text-sm font-medium mb-2 block">Fields of Interest</label>
+                            <label className="block mb-2 text-sm font-medium">Fields of Interest</label>
                             <div className="flex flex-wrap gap-2 mb-3">
                               {editData.Field_of_Interest.map((interest, index) => (
                                 <Badge
                                   key={index}
                                   variant="outline"
-                                  className="border-purple-400 text-purple-500 px-3 py-1 cursor-pointer"
+                                  className="px-3 py-1 text-purple-500 border-purple-400 cursor-pointer"
                                   onClick={() => removeInterest(interest)}
                                 >
                                   {interest} ×
@@ -966,38 +966,38 @@ export default function ProfilePage() {
                                 onKeyDown={(e) => e.key === "Enter" && addInterest()}
                               />
                               <Button onClick={addInterest} size="sm">
-                                <Plus className="h-4 w-4 mr-1" /> Add
+                                <Plus className="mr-1 w-4 h-4" /> Add
                               </Button>
                             </div>
                           </div>
 
                           <div className="mt-6">
-                            <h3 className="text-lg font-medium mb-3">Suggested Interests</h3>
+                            <h3 className="mb-3 text-lg font-medium">Suggested Interests</h3>
                             <div className="flex flex-wrap gap-2">
                               <Badge
                                 variant="outline"
-                                className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100"
+                                className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100"
                                 onClick={() => addSuggestedInterest("Data Analytics")}
                               >
                                 Data Analytics
                               </Badge>
                               <Badge
                                 variant="outline"
-                                className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100"
+                                className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100"
                                 onClick={() => addSuggestedInterest("Python")}
                               >
                                 Python
                               </Badge>
                               <Badge
                                 variant="outline"
-                                className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100"
+                                className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100"
                                 onClick={() => addSuggestedInterest("Cloud Computing")}
                               >
                                 Cloud Computing
                               </Badge>
                               <Badge
                                 variant="outline"
-                                className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100"
+                                className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100"
                                 onClick={() => addSuggestedInterest("Machine Learning")}
                               >
                                 Machine Learning
@@ -1013,7 +1013,7 @@ export default function ProfilePage() {
                                 <Badge
                                   key={index}
                                   variant="outline"
-                                  className="border-purple-400 text-purple-500 px-3 py-1"
+                                  className="px-3 py-1 text-purple-500 border-purple-400"
                                 >
                                   {interest}
                                 </Badge>
@@ -1023,29 +1023,29 @@ export default function ProfilePage() {
                             )}
                           </div>
                           <div className="mt-8">
-                            <h3 className="text-lg font-medium mb-3">Suggested Interests</h3>
+                            <h3 className="mb-3 text-lg font-medium">Suggested Interests</h3>
                             <div className="flex flex-wrap gap-2">
                               <Badge
                                 variant="outline"
-                                className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100"
+                                className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100"
                               >
                                 Data Analytics
                               </Badge>
                               <Badge
                                 variant="outline"
-                                className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100"
+                                className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100"
                               >
                                 Python
                               </Badge>
                               <Badge
                                 variant="outline"
-                                className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100"
+                                className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100"
                               >
                                 Cloud Computing
                               </Badge>
                               <Badge
                                 variant="outline"
-                                className="border-gray-300 text-gray-500 px-3 py-1 cursor-pointer hover:bg-gray-100"
+                                className="px-3 py-1 text-gray-500 border-gray-300 cursor-pointer hover:bg-gray-100"
                               >
                                 Machine Learning
                               </Badge>
@@ -1055,7 +1055,7 @@ export default function ProfilePage() {
                       )}
                     </CardContent>
                     {editMode.interests && (
-                      <CardFooter className="flex justify-between border-t pt-4">
+                      <CardFooter className="flex justify-between pt-4 border-t">
                         <Button
                           variant="outline"
                           onClick={() => setEditMode((prev) => ({ ...prev, interests: false }))}
@@ -1063,7 +1063,7 @@ export default function ProfilePage() {
                           Cancel
                         </Button>
                         <Button onClick={updateMenteeData}>
-                          <Save className="h-4 w-4 mr-2" />
+                          <Save className="mr-2 w-4 h-4" />
                           Save Changes
                         </Button>
                       </CardFooter>
@@ -1079,20 +1079,20 @@ export default function ProfilePage() {
                       <CardTitle>Become a Mentee</CardTitle>
                       <CardDescription>Define your learning requirements</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex flex-col items-center justify-center py-8">
-                      <Lock className="h-16 w-16 text-gray-300 mb-4" />
-                      <p className="text-center text-gray-500 max-w-md">
+                    <CardContent className="flex flex-col justify-center items-center py-8">
+                      <Lock className="mb-4 w-16 h-16 text-gray-300" />
+                      <p className="max-w-md text-center text-gray-500">
                         This section is currently locked. Become a mentee to specify your learning requirements and
                         goals.
                       </p>
                     </CardContent>
-                    <CardFooter className="flex justify-center border-t pt-4">
+                    <CardFooter className="flex justify-center pt-4 border-t">
                       <Button>Become a Mentee</Button>
                     </CardFooter>
                   </Card>
                 ) : (
                   <Card>
-                    <CardHeader className="flex flex-row items-start justify-between">
+                    <CardHeader className="flex flex-row justify-between items-start">
                       <div>
                         <CardTitle>Learning Requirements</CardTitle>
                         <CardDescription>Your specific learning goals and requirements</CardDescription>
@@ -1103,7 +1103,7 @@ export default function ProfilePage() {
                           size="icon"
                           onClick={() => setEditMode((prev) => ({ ...prev, requirements: true }))}
                         >
-                          <Edit className="h-4 w-4" />
+                          <Edit className="w-4 h-4" />
                         </Button>
                       )}
                     </CardHeader>
@@ -1122,9 +1122,9 @@ export default function ProfilePage() {
                         </div>
                       ) : (
                         <>
-                          <div className="bg-gray-50 p-4 rounded-lg mb-6">
-                            <div className="flex items-start gap-2">
-                              <BookOpen className="h-5 w-5 text-gray-500 mt-1 flex-shrink-0" />
+                          <div className="p-4 mb-6 bg-gray-50 rounded-lg">
+                            <div className="flex gap-2 items-start">
+                              <BookOpen className="flex-shrink-0 mt-1 w-5 h-5 text-gray-500" />
                               <div>
                                 <p className="text-gray-700">{userData.Requirements || "No requirements specified"}</p>
                               </div>
@@ -1133,7 +1133,7 @@ export default function ProfilePage() {
 
                           <div className="space-y-4">
                             <h3 className="text-lg font-medium">Recommended Learning Paths</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                               <Card className="bg-purple-50 border-purple-100">
                                 <CardHeader className="pb-2">
                                   <CardTitle className="text-md">SQL Mastery</CardTitle>
@@ -1157,7 +1157,7 @@ export default function ProfilePage() {
                       )}
                     </CardContent>
                     {editMode.requirements && (
-                      <CardFooter className="flex justify-between border-t pt-4">
+                      <CardFooter className="flex justify-between pt-4 border-t">
                         <Button
                           variant="outline"
                           onClick={() => setEditMode((prev) => ({ ...prev, requirements: false }))}
@@ -1165,7 +1165,7 @@ export default function ProfilePage() {
                           Cancel
                         </Button>
                         <Button onClick={updateMenteeData}>
-                          <Save className="h-4 w-4 mr-2" />
+                          <Save className="mr-2 w-4 h-4" />
                           Save Changes
                         </Button>
                       </CardFooter>

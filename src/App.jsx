@@ -16,7 +16,7 @@
 //   return (
   
 //     <Router>
-//     <div className="min-h-screen flex flex-col">
+//     <div className="flex flex-col min-h-screen">
 //       <Navbar userData={userData} setUserData={setUserData} />
 //       <main className="flex-grow">
 //         <Routes>
@@ -52,10 +52,12 @@ import Contact from './pages/static/Contact';
 import ProfilePage from './pages/Profile';
 import VerifyOtpPage from './pages/VerifyOtpPage';
 import LoginModal from './pages/LoginModal';
+import { useAuth } from './context/AuthContext';
+import ProtectedRoute from './constants/protectedRoutes';
+import Connect  from './pages/ConnectPage';
 
 function App() {
-  const [userData, setUserData] = useState(null);
-  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const { userData, setUserData, loginModalOpen, setLoginModalOpen, isVerified, isAuthenticated } = useAuth();
 
   return (
     <Router>
@@ -65,8 +67,8 @@ function App() {
         onLoginSuccess={(data) => setUserData(data)}
       />
 
-      <div className="min-h-screen flex flex-col">
-        <Navbar userData={userData} setUserData={setUserData} onOpenLogin={() => setLoginModalOpen(true)} />
+      <div className="flex flex-col min-h-screen">
+        <Navbar onOpenLogin={() => setLoginModalOpen(true)} />
         
         <main className="flex-grow">
           <Routes>
@@ -78,6 +80,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/connect" element={<Connect />} />
             <Route path="/verify-otp" element={<VerifyOtpPage />} />
           </Routes>
         </main>

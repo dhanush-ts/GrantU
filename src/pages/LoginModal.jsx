@@ -12,6 +12,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { api } from '@/api';
 import { PassField } from '@/constants/PassField';
+import { useAuth } from '@/context/AuthContext';
 
 
 
@@ -21,6 +22,7 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { setIsAuthenticated, verifyUser} = useAuth();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -58,11 +60,14 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
       }
 
       console.log("Login success:", data);
-      localStorage.setItem("token", data.token);
-      window.location.reload();
+      localStorage.setItem("authToken", data.token);
+      if(data.verified){
+        verifyUser()
+      }
 
       onLoginSuccess(data);
       onOpenChange(false);
+      setIsAuthenticated(true);
       navigate('/scholarships');
     } catch (error) {
       console.error("Login error:", error);

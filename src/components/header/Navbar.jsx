@@ -7,11 +7,11 @@ import MentorRegistrationForm from '../forms/MentorRegister';
 import MenteeRegistrationForm from '../forms/MenteeRegister';
 import { api } from '@/api';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/context/AuthContext';
 
-const Navbar = ({userData, setUserData}) => {
+const Navbar = () => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   // const [userData, setUserData] = useState(null);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   // const [isMentorRegistrationOpen, setIsMentorRegistrationOpen] = useState(false);
@@ -23,13 +23,14 @@ const Navbar = ({userData, setUserData}) => {
   const location = useLocation();
   const currentPath = location.pathname;
   const navigate = useNavigate();
+  const { userData, setUserData, isAuthenticated, setIsAuthenticated} = useAuth()
+  
 
   useEffect(() => {
     const checkAuthStatus = async () => {
       const token = localStorage.getItem('authToken');
       
       if (token) {
-        setIsAuthenticated(true);
         try {
           const response = await fetch(`${api}/api/user/profile/`, {
             headers: {
@@ -42,10 +43,41 @@ const Navbar = ({userData, setUserData}) => {
           if (response.ok) {
             const data = await response.json();
             setUserData(data);
+            setIsAuthenticated(true)
           } else {
             console.error("Failed to fetch user profile");
             localStorage.removeItem('authToken');
-            setIsAuthenticated(false);
+          }
+        } catch (error) {
+          console.error("Error fetching profile:", error);
+        }
+      }
+    };
+    
+    checkAuthStatus();
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      const token = localStorage.getItem('authToken');
+      
+      if (token) {
+        try {
+          const response = await fetch(`${api}/api/user/profile/`, {
+            headers: {
+              "Authorization": `Bearer ${token}`,
+              "Accept": "application/json"
+            },
+            credentials: 'include',
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            setUserData(data);
+            setIsAuthenticated(true)
+          } else {
+            console.error("Failed to fetch user profile");
+            localStorage.removeItem('authToken');
           }
         } catch (error) {
           console.error("Error fetching profile:", error);
@@ -57,9 +89,7 @@ const Navbar = ({userData, setUserData}) => {
   }, []);
 
   const handleLoginSuccess = (data) => {
-    setIsAuthenticated(true);
     setUserData(data.user);
-    localStorage.setItem('authToken', data.token);
   };
 
   const handleLogout = () => {
@@ -94,10 +124,10 @@ const Navbar = ({userData, setUserData}) => {
   
 
   return (
-    <header className="container max-w-7xl mx-auto px-4 py-4 relative">
-      <nav className="flex items-center justify-between">
+    <header className="container relative px-4 py-4 mx-auto max-w-7xl">
+      <nav className="flex justify-between items-center">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2 items-center">
           <svg
             width="24"
             height="24"
@@ -117,11 +147,11 @@ const Navbar = ({userData, setUserData}) => {
         </div>
         
           {registrationType && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-              <div className="max-w-md w-full relative">
+            <div className="flex fixed inset-0 z-50 justify-center items-center p-4 bg-black bg-opacity-50">
+              <div className="relative w-full max-w-md">
                 <button 
                   onClick={closeRegistrationForm}
-                  className="absolute top-2 right-2 bg-white rounded-full p-1 text-gray-700 hover:bg-gray-100"
+                  className="absolute top-2 right-2 p-1 text-gray-700 bg-white rounded-full hover:bg-gray-100"
                 >
                   <X size={24} />
                 </button>
@@ -133,7 +163,7 @@ const Navbar = ({userData, setUserData}) => {
 
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden items-center space-x-8 md:flex">
           <Link to="/" className={`text-blue-900 hover:text-purple-500 ${currentPath === '/' ? 'font-bold text-blue-600' : ''}`}>
             Home
           </Link>
@@ -149,20 +179,23 @@ const Navbar = ({userData, setUserData}) => {
           <Link to="/loans" className={`text-blue-900 hover:text-purple-500 ${currentPath.startsWith('/loans') ? 'font-bold text-blue-600' : ''}`}>
             Loans
           </Link>
+          <Link to="/connect" className={`text-blue-900 hover:text-purple-500 ${currentPath.startsWith('/connect') ? 'font-bold text-blue-600' : ''}`}>
+            Connect Now
+          </Link>
         </div>
 
         {/* Desktop Auth Buttons / Profile */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden gap-2 items-center md:flex">
           {isAuthenticated ? (
             <div className="relative">
               <div 
-                className="flex items-center gap-2 px-3 py-2 rounded-full border border-blue-200 bg-blue-50 text-blue-800 cursor-pointer"
+                className="flex gap-2 items-center px-3 py-2 text-blue-800 bg-blue-50 rounded-full border border-blue-200 cursor-pointer"
                 onClick={toggleProfileMenu}
                 onMouseEnter={() => setIsProfileMenuOpen(true)}
               >
-                <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white">
+                <div className="flex justify-center items-center w-8 h-8 text-white bg-blue-600 rounded-full">
                   {userData?.profile_image ? (
-                    <img src={userData.profile_image} alt="Profile" className="w-full h-full rounded-full object-cover" />
+                    <img src={userData.profile_image} alt="Profile" className="object-cover w-full h-full rounded-full" />
                   ) : (
                     <User size={16} />
                   )}
@@ -172,7 +205,7 @@ const Navbar = ({userData, setUserData}) => {
 
               {/* Profile Dropdown */}
               <div 
-                className={`absolute right-0 top-12 w-56 bg-white shadow-lg rounded-md overflow-hidden z-10 transition-opacity ${isProfileMenuOpen ? 'opacity-100' : 'opacity-0 invisible'}`}
+                className={`absolute right-0 top-12 w-56 bg-white shadow-lg rounded-md overflow-hidden z-10 transition-opacity ${isProfileMenuOpen ? 'opacity-100' : 'invisible opacity-0'}`}
                 onMouseLeave={() => setIsProfileMenuOpen(false)}
               >
                 <div className="p-4 border-b border-gray-100">
@@ -180,18 +213,18 @@ const Navbar = ({userData, setUserData}) => {
                   <p className="text-sm text-gray-500 truncate">{userData?.Email_Address || userData?.Phone_Number}</p>
                 </div>
                 <div className="py-2">
-                  <Link to="/profile" className="block px-4 py-2 hover:bg-blue-50 text-gray-700">My Profile</Link>
-                  <Link to="/dashboard" className="block px-4 py-2 hover:bg-blue-50 text-gray-700">Dashboard</Link>
-                  <Link to="/settings" className="block px-4 py-2 hover:bg-blue-50 text-gray-700">Settings</Link>
-                  {!userData?.Expertise && <button onClick={openMentorRegistration} className="block w-full text-left px-4 py-2 hover:bg-blue-50 text-gray-700">Join as Mentor</button>}
-                  {!userData?.Requirements && <button onClick={openMenteeRegistration} className="block w-full text-left px-4 py-2 hover:bg-blue-50 text-gray-700">Join as Mentee</button>}
-                  <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-red-50 text-red-600">Logout</button>
+                  <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-blue-50">My Profile</Link>
+                  <Link to="/dashboard" className="block px-4 py-2 text-gray-700 hover:bg-blue-50">Dashboard</Link>
+                  <Link to="/settings" className="block px-4 py-2 text-gray-700 hover:bg-blue-50">Settings</Link>
+                  {!userData?.Expertise && <button onClick={openMentorRegistration} className="block px-4 py-2 w-full text-left text-gray-700 hover:bg-blue-50">Join as Mentor</button>}
+                  {!userData?.Requirements && <button onClick={openMenteeRegistration} className="block px-4 py-2 w-full text-left text-gray-700 hover:bg-blue-50">Join as Mentee</button>}
+                  <button onClick={handleLogout} className="block px-4 py-2 w-full text-left text-red-600 hover:bg-red-50">Logout</button>
                 </div>
               </div>
             </div>
           ) : (
             <>
-              <Button variant="outline" className="border-blue-800 text-blue-600 hover:bg-purple-500 hover:text-white" onClick={() => setLoginModalOpen(true)}>Login</Button>
+              <Button variant="outline" className="text-blue-600 border-blue-800 hover:bg-purple-500 hover:text-white" onClick={() => setLoginModalOpen(true)}>Login</Button>
               <Button className="bg-violet-500 hover:bg-violet-600">
                 <Link to="/signup">SignUp</Link>
               </Button>
@@ -199,8 +232,8 @@ const Navbar = ({userData, setUserData}) => {
           )}
         </div>
         {/* {isMentorRegistrationOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+          <div className="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-50">
+            <div className="p-6 w-full max-w-md bg-white rounded-lg shadow-lg">
               <button
                 onClick={() => setIsMentorRegistrationOpen(false)}
                 className="absolute top-4 right-4 text-gray-600"
@@ -212,8 +245,8 @@ const Navbar = ({userData, setUserData}) => {
           </div>
         )}
         {isMenteeRegistrationOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+          <div className="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-50">
+            <div className="p-6 w-full max-w-md bg-white rounded-lg shadow-lg">
               <button
                 onClick={() => setIsMentorRegistrationOpen(false)}
                 className="absolute top-4 right-4 text-gray-600"
@@ -226,42 +259,43 @@ const Navbar = ({userData, setUserData}) => {
         )} */}
 
         {/* Mobile Hamburger Button */}
-        <button className="md:hidden text-blue-800 focus:outline-none" onClick={toggleMenu}>
+        <button className="text-blue-800 md:hidden focus:outline-none" onClick={toggleMenu}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white absolute top-16 left-0 right-0 z-50 shadow-md py-4 px-4 flex flex-col">
-          <div className="flex flex-col space-y-4 mb-6">
+        <div className="flex absolute right-0 left-0 top-16 z-50 flex-col px-4 py-4 bg-white shadow-md md:hidden">
+          <div className="flex flex-col mb-6 space-y-4">
             <Link to="/" className={`text-blue-900 hover:text-purple-500 py-2 ${currentPath === '/' ? 'font-bold text-blue-600' : ''}`} onClick={toggleMenu}>Home</Link>
             <Link to="/students" className={`text-blue-900 hover:text-purple-500 py-2 ${currentPath.startsWith('/students') ? 'font-bold text-blue-600' : ''}`} onClick={toggleMenu}>Mentee</Link>
             <Link to="/mentors" className={`text-blue-900 hover:text-purple-500 py-2 ${currentPath.startsWith('/mentors') ? 'font-bold text-blue-600' : ''}`} onClick={toggleMenu}>Mentors</Link>
             <Link to="/scholarships" className={`text-blue-900 hover:text-purple-500 py-2 ${currentPath.startsWith('/scholarships') ? 'font-bold text-blue-600' : ''}`} onClick={toggleMenu}>Scholarship providers</Link>
             <Link to="/loans" className={`text-blue-900 hover:text-purple-500 py-2 ${currentPath.startsWith('/loans') ? 'font-bold text-blue-600' : ''}`} onClick={toggleMenu}>Loans</Link>
+            <Link to="/connect" className={`text-blue-900 hover:text-purple-500 py-2 ${currentPath.startsWith('/connect') ? 'font-bold text-blue-600' : ''}`} onClick={toggleMenu}>Connect Now</Link>
           </div>
 
           {/* Mobile Auth Buttons / Profile */}
           <div className="flex flex-col space-y-2">
             {isAuthenticated ? (
-              <div className="border rounded-md p-3">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white">
+              <div className="p-3 rounded-md border">
+                <div className="flex gap-2 items-center mb-3">
+                  <div className="flex justify-center items-center w-8 h-8 text-white bg-blue-600 rounded-full">
                     <User size={16} />
                   </div>
                   <span className="font-medium text-blue-800 uppercase">{userData?.First_Name || userData?.Last_Name || "Profile"}</span>
                 </div>
-                <div className="flex flex-col space-y-2 pt-2 border-t">
-                  <Link to="/profile" className="text-gray-700 py-2" onClick={toggleMenu}>My Profile</Link>
-                  <Link to="/dashboard" className="text-gray-700 py-2" onClick={toggleMenu}>Dashboard</Link>
-                  <button onClick={handleLogout} className="text-left text-red-600 py-2">Logout</button>
+                <div className="flex flex-col pt-2 space-y-2 border-t">
+                  <Link to="/profile" className="py-2 text-gray-700" onClick={toggleMenu}>My Profile</Link>
+                  <Link to="/dashboard" className="py-2 text-gray-700" onClick={toggleMenu}>Dashboard</Link>
+                  <button onClick={handleLogout} className="py-2 text-left text-red-600">Logout</button>
                 </div>
               </div>
             ) : (
               <>
-                <Button variant="outline" className="border-blue-800 text-blue-600 hover:bg-purple-500 hover:text-white w-full" onClick={() => { setLoginModalOpen(true); toggleMenu(); }}>Login</Button>
-                <Button className="bg-violet-500 hover:bg-violet-600 w-full" onClick={toggleMenu}>
+                <Button variant="outline" className="w-full text-blue-600 border-blue-800 hover:bg-purple-500 hover:text-white" onClick={() => { setLoginModalOpen(true); toggleMenu(); }}>Login</Button>
+                <Button className="w-full bg-violet-500 hover:bg-violet-600" onClick={toggleMenu}>
                   <Link to="/signup">SignUp</Link>
                 </Button>
               </>

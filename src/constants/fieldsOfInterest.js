@@ -1,4 +1,5 @@
 export const FIELD_KEYWORDS_MAP = {
+    
     "Artificial Intelligence": ["ai", "artificial", "artificial intelligence", "machine intel"],
     "Machine Learning": ["ml", "machine learning", "supervised", "unsupervised", "ml engineer"],
     "Deep Learning": ["dl", "deep learning", "neural network", "cnn", "rnn", "transformers"],

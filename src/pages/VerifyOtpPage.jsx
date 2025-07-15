@@ -5,12 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { api } from '@/api';
 import OTPInput from '@/constants/OTP_Ui';
+import { useAuth } from '@/context/AuthContext';
 
 const VerifyOtpPage = () => {
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const { verifyUser } = useAuth();
 
   const handleVerify = async () => {
     console.log("OTP being sent:", otp);
@@ -30,6 +32,7 @@ const VerifyOtpPage = () => {
       if (!res.ok) throw new Error(data.error || 'OTP verification failed');
 
       setMessage('OTP Verified!');
+      verifyUser();
       setTimeout(() => navigate('/'), 1500); // or your home page
     } catch (err) {
       setError(err.message);

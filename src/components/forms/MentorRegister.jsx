@@ -1,37 +1,32 @@
 import { useState } from "react";
 import { X, Check } from "lucide-react";
 import { api } from "@/api";
+import { getMatchingFields, getStandardizedField } from "@/constants/standardizeField";
 
 export default function MentorRegistrationForm() {
   const [expertise, setExpertise] = useState([]);
   const [yearsOfExperience, setYearsOfExperience] = useState("");
   const [organizationDetail, setOrganizationDetail] = useState("");
   const [inputValue, setInputValue] = useState("");
-
-  const expertiseOptions = [
-    "Web Development",
-    "Mobile Development",
-    "Data Science",
-    "Machine Learning",
-    "UI/UX Design",
-    "Product Management",
-    "Digital Marketing"
-  ];
-
-  const filteredOptions = expertiseOptions.filter(
-    option => !expertise.includes(option) && 
-    option.toLowerCase().includes(inputValue.toLowerCase())
-  );
+  const [suggestions, setSuggestions] = useState([]);
 
   const handleAddExpertise = (option) => {
-    setExpertise([...expertise, option]);
+    const standardized = getStandardizedField(option);
+    if (!expertise.includes(standardized)) {
+      setExpertise([...expertise, standardized]);
+    }
     setInputValue("");
+    setSuggestions([]);
   };
-  
+
   const handleAddCustomExpertise = () => {
-    if (inputValue && !expertise.includes(inputValue)) {
-      setExpertise([...expertise, inputValue]);
+    if (inputValue.trim()) {
+      const standardized = getStandardizedField(inputValue);
+      if (!expertise.includes(standardized)) {
+        setExpertise([...expertise, standardized]);
+      }
       setInputValue("");
+      setSuggestions([]);
     }
   };
 
@@ -44,23 +39,21 @@ export default function MentorRegistrationForm() {
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async () => {
-    // Reset states
     setError("");
+    setSuccess(false);
     setIsSubmitting(true);
     
     try {
-      // Get JWT token from localStorage
-      const token = localStorage.getItem('token');
-      
+      const token = localStorage.getItem("authToken");
       if (!token) {
-        throw new Error('Authentication token not found. Please login first.');
+        throw new Error("Authentication token not found. Please login first.");
       }
-      
+
       const response = await fetch(`${api}/api/user/mentor/`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
           Expertise: expertise,
@@ -68,26 +61,25 @@ export default function MentorRegistrationForm() {
           organization_detail: organizationDetail
         }),
       });
-      
+
       const data = await response.json();
-      
       if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
+        throw new Error(data.message || "Registration failed");
       }
-      
+
       setSuccess(true);
     } catch (err) {
-      setError(err.message || 'Failed to register. Please try again.');
+      setError(err.message || "Failed to register. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-2xl font-bold text-purple-600 text-center mb-6">Join as a Mentor</h2>
-      <p className="text-center text-gray-600 mb-6">Start your journey with GrantU</p>
-      
+    <div className="p-6 mx-auto w-full max-w-md bg-white rounded-lg shadow-lg">
+      <h2 className="mb-6 text-2xl font-bold text-center text-purple-600">Join as a Mentor</h2>
+      <p className="mb-6 text-center text-gray-600">Start your journey with GrantU</p>
+
       <div className="space-y-4">
         {/* Expertise Multiselect */}
         <div className="space-y-2">
@@ -99,52 +91,51 @@ export default function MentorRegistrationForm() {
               <input
                 type="text"
                 value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setInputValue(val);
+                  setSuggestions(val ? getMatchingFields(val) : []);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
                     e.preventDefault();
                     handleAddCustomExpertise();
                   }
                 }}
                 placeholder="Search or add expertise..."
-                className="w-full p-2 border border-gray-300 rounded-l focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                className="p-2 w-full rounded-l border border-gray-300 outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               />
               <button
                 type="button"
                 onClick={handleAddCustomExpertise}
-                className="bg-purple-600 text-white px-3 rounded-r hover:bg-purple-700"
+                className="px-3 text-white bg-purple-600 rounded-r hover:bg-purple-700"
               >
                 <Check size={18} />
               </button>
             </div>
-            {inputValue && filteredOptions.length > 0 && (
-              <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-auto">
-                {filteredOptions.map((option) => (
-                  <div
-                    key={option}
-                    className="p-2 hover:bg-purple-100 cursor-pointer"
+
+            {/* Dropdown Suggestion */}
+            {suggestions.length > 0 && (
+              <ul className="overflow-auto absolute z-10 mt-1 w-full max-h-60 bg-white rounded border border-gray-300 shadow-lg">
+                {suggestions.map((option, index) => (
+                  <li
+                    key={index}
                     onClick={() => handleAddExpertise(option)}
+                    className="px-3 py-2 text-sm cursor-pointer hover:bg-purple-100"
                   >
                     {option}
-                  </div>
+                  </li>
                 ))}
-              </div>
-            )}
-            {inputValue && filteredOptions.length === 0 && (
-              <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded shadow-lg">
-                <div className="p-2 hover:bg-purple-100 cursor-pointer" onClick={handleAddCustomExpertise}>
-                  Add "{inputValue}"
-                </div>
-              </div>
+              </ul>
             )}
           </div>
-          
+
           {/* Selected expertise tags */}
           <div className="flex flex-wrap gap-2 mt-2">
             {expertise.map((item) => (
               <span
                 key={item}
-                className="inline-flex items-center bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded"
+                className="inline-flex items-center px-2 py-1 text-sm text-purple-800 bg-purple-100 rounded"
               >
                 {item}
                 <button
@@ -169,7 +160,7 @@ export default function MentorRegistrationForm() {
             id="yearsOfExperience"
             value={yearsOfExperience}
             onChange={(e) => setYearsOfExperience(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+            className="p-2 w-full rounded border border-gray-300 outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
           />
         </div>
 
@@ -183,32 +174,21 @@ export default function MentorRegistrationForm() {
             id="organizationDetail"
             value={organizationDetail}
             onChange={(e) => setOrganizationDetail(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+            className="p-2 w-full rounded border border-gray-300 outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
           />
         </div>
 
-        {/* Submit button */}
+        {/* Submit Button */}
         <button
           onClick={handleSubmit}
           disabled={isSubmitting}
           className={`w-full ${isSubmitting ? 'bg-purple-400' : 'bg-purple-600 hover:bg-purple-700'} text-white font-medium py-2 px-4 rounded transition-colors duration-300 flex justify-center items-center`}
         >
-          {isSubmitting ? 'Registering...' : 'Register as Mentor'}
+          {isSubmitting ? "Registering..." : "Register as Mentor"}
         </button>
-        
-        {/* Error message */}
-        {error && (
-          <div className="mt-3 text-red-600 text-center text-sm">
-            {error}
-          </div>
-        )}
-        
-        {/* Success message */}
-        {success && (
-          <div className="mt-3 text-green-600 text-center text-sm">
-            Registration successful! You are now registered as a mentor.
-          </div>
-        )}
+
+        {error && <div className="mt-3 text-sm text-center text-red-600">{error}</div>}
+        {success && <div className="mt-3 text-sm text-center text-green-600">Registration successful! You are now registered as a mentor.</div>}
       </div>
     </div>
   );

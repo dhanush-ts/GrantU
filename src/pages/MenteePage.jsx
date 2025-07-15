@@ -57,6 +57,13 @@ export default function MenteePage({userData}) {
               Learn More
             </Button>
           </div>}
+          {userData?.Requirements && 
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button className="bg-white text-purple-500 hover:bg-gray-100">
+              Find Mentor
+            </Button>
+          </div>}
+
         </div>
       </section>
 
@@ -123,10 +130,11 @@ export default function MenteePage({userData}) {
             Join our community of successful scholars and get the guidance you need
           </p>
           {/* <div className="flex flex-col sm:flex-row justify-center gap-4"> */}
+          
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button className="bg-purple-500 hover:bg-purple-600 text-white" onClick={openRegistrationForm}>
+          {!userData?.Requirements &&<Button className="bg-purple-500 hover:bg-purple-600 text-white" onClick={openRegistrationForm}>
               Get Started
-            </Button>
+            </Button>}
             <Button variant="outline" className="border-purple-500 text-purple-500 hover:bg-purple-50">
               <Link to ="/mentors">Browse Mentors</Link>
             </Button>

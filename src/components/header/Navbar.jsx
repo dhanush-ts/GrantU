@@ -205,7 +205,7 @@ const Navbar = () => {
 
               {/* Profile Dropdown */}
               <div 
-                className={`absolute right-0 top-12 w-56 bg-white shadow-lg rounded-md overflow-hidden z-10 transition-opacity ${isProfileMenuOpen ? 'opacity-100' : 'invisible opacity-0'}`}
+                className={`absolute right-0 top-12 w-56 bg-white shadow-lg rounded-md overflow-hidden z-40 transition-opacity ${isProfileMenuOpen ? 'opacity-100' : 'invisible opacity-0'}`}
                 onMouseLeave={() => setIsProfileMenuOpen(false)}
               >
                 <div className="p-4 border-b border-gray-100">

@@ -54,7 +54,7 @@ import VerifyOtpPage from './pages/VerifyOtpPage';
 import LoginModal from './pages/LoginModal';
 import { useAuth } from './context/AuthContext';
 import ProtectedRoute from './constants/protectedRoutes';
-import Connect  from './pages/ConnectPage';
+import MentorshipPlatform  from './pages/ConnectPage';
 
 function App() {
   const { userData, setUserData, loginModalOpen, setLoginModalOpen, isVerified, isAuthenticated } = useAuth();
@@ -80,7 +80,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/connect" element={<Connect />} />
+            <Route path="/connect" element={<MentorshipPlatform />} />
             <Route path="/verify-otp" element={<VerifyOtpPage />} />
           </Routes>
         </main>

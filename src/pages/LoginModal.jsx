@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
-import { api } from '@/api';
+import { api, fetchWithAuth } from '@/api';
 import { PassField } from '@/constants/PassField';
 import { useAuth } from '@/context/AuthContext';
 
@@ -33,16 +33,13 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
     setError('');
     
     try {
-      const response = await fetch(`${api}/api/auth/login/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      });
+      const response = await fetchWithAuth("/auth/login/", {
+      method: "POST",
+      body: {
+        email: email,
+        password: password,
+      },
+    });
 
       const contentType = response.headers.get("Content-Type") || "";
       
@@ -53,10 +50,6 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
         const text = await response.text();
         console.log(text);
         throw new Error("Server returned an invalid response format");
-      }
-
-      if (!response.ok) {
-        throw new Error(data.message || "Login failed");
       }
 
       console.log("Login success:", data);

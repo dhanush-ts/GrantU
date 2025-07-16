@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { User, Plus, X, Sparkles } from "lucide-react"
 import StudentsList from "./StudentsList"
+import { fetchWithAuth } from "@/api"
 
 const MyConnections = ({ userData, type, act }) => {
   const [connections, setConnections] = useState([])
@@ -20,10 +21,10 @@ const MyConnections = ({ userData, type, act }) => {
       const token = localStorage.getItem("authToken")
       const endpoint =
         type === "students"
-          ? "http://127.0.0.1:8000/api/user/requests/mentor?accepted_only=true"
-          : "http://127.0.0.1:8000/api/user/requests/mentee?accepted_only=true"
+          ? "/user/requests/mentor?accepted_only=true"
+          : "/user/requests/mentee?accepted_only=true"
 
-      const response = await fetch(endpoint, {
+      const response = await fetchWithAuth(endpoint, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

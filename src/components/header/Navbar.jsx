@@ -5,7 +5,7 @@ import LoginPage from "../../pages/LoginModal";
 import { Menu, X, User } from 'lucide-react';
 import MentorRegistrationForm from '../forms/MentorRegister';
 import MenteeRegistrationForm from '../forms/MenteeRegister';
-import { api } from '@/api';
+import { api, fetchWithAuth } from '@/api';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 
@@ -32,7 +32,7 @@ const Navbar = () => {
       
       if (token) {
         try {
-          const response = await fetch(`${api}/api/user/profile/`, {
+          const response = await fetchWithAuth(`/user/profile/`, {
             headers: {
               "Authorization": `Bearer ${token}`,
               "Accept": "application/json"
@@ -63,7 +63,7 @@ const Navbar = () => {
       
       if (token) {
         try {
-          const response = await fetch(`${api}/api/user/profile/`, {
+          const response = await fetchWithAuth(`/user/profile/`, {
             headers: {
               "Authorization": `Bearer ${token}`,
               "Accept": "application/json"

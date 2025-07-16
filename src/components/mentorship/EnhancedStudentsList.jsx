@@ -17,6 +17,7 @@ import {
   MessageSquare,
   Sparkles,
 } from "lucide-react"
+import { fetchWithAuth } from "@/api"
 
 const EnhancedStudentsList = ({ userData, act }) => {
   const [students, setStudents] = useState([])
@@ -36,7 +37,7 @@ const EnhancedStudentsList = ({ userData, act }) => {
   const fetchStudents = async () => {
     try {
       const token = localStorage.getItem("authToken")
-      const response = await fetch("http://127.0.0.1:8000/api/user/list/", {
+      const response = await fetchWithAuth("/user/list/", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -65,7 +66,7 @@ const EnhancedStudentsList = ({ userData, act }) => {
           .filter((i) => i),
       }
 
-      await fetch("http://127.0.0.1:8000/api/user/booking/", {
+      await fetchWithAuth("/user/booking/", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

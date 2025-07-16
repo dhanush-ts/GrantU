@@ -1,14 +1,14 @@
 import { UserRound, Award, GraduationCap, DollarSign, IndianRupee } from "lucide-react"
 import StatCard from "./StatCard"
 import { useEffect, useState } from "react"
-import { api } from "@/api";
+import { api, fetchWithAuth } from "@/api";
 
 export default function StatsSection() {
     const [data,setData] = useState(null);
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const resp = await fetch(`${api}/api/user/metrics/`);
+            const resp = await fetchWithAuth(`/user/metrics/`);
             const data = await resp.json();
             setData(data);
           } catch (error) {

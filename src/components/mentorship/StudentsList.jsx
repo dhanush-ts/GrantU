@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { User, UserCheck, Clock, Send, X, Building, Target, Lightbulb, MessageSquare, Mail, Phone } from "lucide-react"
+import { fetchWithAuth } from "@/api"
 
 const StudentsList = ({ userData }) => {
   const [students, setStudents] = useState([])
@@ -24,7 +25,7 @@ const StudentsList = ({ userData }) => {
   const fetchStudents = async () => {
     try {
       const token = localStorage.getItem("authToken")
-      const response = await fetch("http://127.0.0.1:8000/api/user/list/", {
+      const response = await fetchWithAuth("/user/list/", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -53,7 +54,7 @@ const StudentsList = ({ userData }) => {
           .filter((i) => i),
       }
 
-      await fetch("http://127.0.0.1:8000/api/user/booking/", {
+      await fetchWithAuth("/user/booking/", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

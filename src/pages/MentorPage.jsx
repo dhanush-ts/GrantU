@@ -8,7 +8,7 @@ import Footer from "@/components/header/Footer"
 import { Badge } from "@/components/ui/badge"
 import MentorRegistrationForm from "@/components/forms/MentorRegister"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { api } from "@/api"
+import { api, fetchWithAuth } from "@/api"
 
 export default function MentorPage({ userData }) {
   const [mentors, setMentors] = useState([])
@@ -21,7 +21,7 @@ export default function MentorPage({ userData }) {
     const fetchMentors = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`${api}/api/user/mentors/`)
+        const response = await fetchWithAuth(`/user/mentors/`)
 
         if (!response.ok) {
           throw new Error(`Failed to fetch mentors: ${response.status}`)

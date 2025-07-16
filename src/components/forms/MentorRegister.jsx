@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X, Check } from "lucide-react";
-import { api } from "@/api";
+import { api, fetchWithAuth } from "@/api";
 import { getMatchingFields, getStandardizedField } from "@/constants/standardizeField";
 
 export default function MentorRegistrationForm() {
@@ -49,7 +49,7 @@ export default function MentorRegistrationForm() {
         throw new Error("Authentication token not found. Please login first.");
       }
 
-      const response = await fetch(`${api}/api/user/mentor/`, {
+      const response = await fetchWithAuth(`/user/mentor/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

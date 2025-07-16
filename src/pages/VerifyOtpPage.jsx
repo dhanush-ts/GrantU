@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { api } from '@/api';
+import { api, fetchWithAuth } from '@/api';
 import OTPInput from '@/constants/OTP_Ui';
 import { useAuth } from '@/context/AuthContext';
 
@@ -18,7 +18,7 @@ const VerifyOtpPage = () => {
     console.log("OTP being sent:", otp);
     setError('');
     try {
-      const res = await fetch(`${api}/api/auth/register-verify/`, {
+      const res = await fetchWithAuth(`${api}/api/auth/register-verify/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

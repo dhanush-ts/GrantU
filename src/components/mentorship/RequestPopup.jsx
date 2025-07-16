@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { X, User, Building, Target, Lightbulb } from "lucide-react"
+import { fetchWithAuth } from "@/api"
 
 const RequestPopup = ({ isOpen, onClose, type, userData }) => {
   const [requests, setRequests] = useState([])
@@ -21,10 +22,10 @@ const RequestPopup = ({ isOpen, onClose, type, userData }) => {
       const token = localStorage.getItem("authToken")
       const endpoint =
         type === "mentee"
-          ? "http://127.0.0.1:8000/api/user/requests/mentee/"
-          : "http://127.0.0.1:8000/api/user/requests/mentor/"
+          ? "/user/requests/mentee/"
+          : "/user/requests/mentor/"
 
-      const response = await fetch(endpoint, {
+      const response = await fetchWithAuth(endpoint, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -43,7 +44,7 @@ const RequestPopup = ({ isOpen, onClose, type, userData }) => {
   const handleAccept = async (bookingId) => {
     try {
       const token = localStorage.getItem("authToken")
-      await fetch(`http://127.0.0.1:8000/api/user/requests/${bookingId}/`, {
+      await fetchWithAuth(`/user/requests/${bookingId}/`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -59,7 +60,7 @@ const RequestPopup = ({ isOpen, onClose, type, userData }) => {
   const handleReject = async (bookingId) => {
     try {
       const token = localStorage.getItem("authToken")
-      await fetch(`http://127.0.0.1:8000/api/user/requests/reject/${bookingId}/`, {
+      await fetchWithAuth(`/user/requests/reject/${bookingId}/`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

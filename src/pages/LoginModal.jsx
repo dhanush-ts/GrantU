@@ -35,10 +35,10 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
     try {
       const response = await fetchWithAuth("/auth/login/", {
       method: "POST",
-      body: {
+      body: JSON.stringify({
         email: email,
         password: password,
-      },
+      }),
     });
 
       const contentType = response.headers.get("Content-Type") || "";

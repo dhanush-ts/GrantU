@@ -179,9 +179,9 @@ const Navbar = () => {
           {/* <Link to="/loans" className={`text-blue-900 hover:text-purple-500 ${currentPath.startsWith('/loans') ? 'font-bold text-blue-600' : ''}`}>
             Loans
           </Link> */}
-          <Link to="/connect" className={`text-blue-900 hover:text-purple-500 ${currentPath.startsWith('/connect') ? 'font-bold text-blue-600' : ''}`}>
+          {isAuthenticated && <Link to="/connect" className={`text-blue-900 hover:text-purple-500 ${currentPath.startsWith('/connect') ? 'font-bold text-blue-600' : ''}`}>
             Connect Now
-          </Link>
+          </Link>}
         </div>
 
         {/* Desktop Auth Buttons / Profile */}

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 
 const Navbar = () => {
-  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  // const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [userData, setUserData] = useState(null);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -23,7 +23,7 @@ const Navbar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const navigate = useNavigate();
-  const { userData, setUserData, isAuthenticated, setIsAuthenticated} = useAuth()
+  const { userData, setUserData, isAuthenticated, setIsAuthenticated,loginModalOpen, setLoginModalOpen} = useAuth()
   
 
   useEffect(() => {
@@ -176,9 +176,9 @@ const Navbar = () => {
           <Link to="/scholarships" className={`text-blue-900 hover:text-purple-500 ${currentPath.startsWith('/scholarships') ? 'font-bold text-blue-600' : ''}`}>
             Scholarship
           </Link>
-          <Link to="/loans" className={`text-blue-900 hover:text-purple-500 ${currentPath.startsWith('/loans') ? 'font-bold text-blue-600' : ''}`}>
+          {/* <Link to="/loans" className={`text-blue-900 hover:text-purple-500 ${currentPath.startsWith('/loans') ? 'font-bold text-blue-600' : ''}`}>
             Loans
-          </Link>
+          </Link> */}
           <Link to="/connect" className={`text-blue-900 hover:text-purple-500 ${currentPath.startsWith('/connect') ? 'font-bold text-blue-600' : ''}`}>
             Connect Now
           </Link>

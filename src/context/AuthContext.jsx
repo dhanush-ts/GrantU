@@ -20,13 +20,9 @@ export const AuthProvider = ({ children }) => {
     setState((prev) => ({ ...prev, userData: user }));
   };
 
-  const openLoginModal = () => {
-    setState((prev) => ({ ...prev, loginModalOpen: true }));
-  };
-
-  const closeLoginModal = () => {
-    setState((prev) => ({ ...prev, loginModalOpen: false }));
-  };
+  const setLoginModalOpen = (val) => {
+    setState((prev) => ({ ...prev, loginModalOpen: val }));
+  }
 
   const verifyUser = () => {
     setState((prev) => ({ ...prev, isVerified: true }));
@@ -41,8 +37,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         ...state,
         setUserData,
-        openLoginModal,
-        closeLoginModal,
+        setLoginModalOpen,
         setIsAuthenticated,
         verifyUser,
         resetAuth,

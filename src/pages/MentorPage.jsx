@@ -9,12 +9,14 @@ import { Badge } from "@/components/ui/badge"
 import MentorRegistrationForm from "@/components/forms/MentorRegister"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { api, fetchWithAuth } from "@/api"
+import { useAuth } from "@/context/AuthContext"
 
 export default function MentorPage({ userData }) {
   const [mentors, setMentors] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [showRegistrationForm, setShowRegistrationForm] = useState(false)
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const {isAuthenticated, loginModalOpen, setLoginModalOpen} = useAuth();
 
   // Fetch mentors data
   useEffect(() => {
@@ -41,7 +43,11 @@ export default function MentorPage({ userData }) {
   }, [])
 
   const openRegistrationForm = () => {
-    setShowRegistrationForm(true)
+    if(isAuthenticated){
+      setShowRegistrationForm(true);
+    }else{
+      setLoginModalOpen(true);
+    }
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 

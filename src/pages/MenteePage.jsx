@@ -5,12 +5,19 @@ import Footer from "@/components/header/Footer";
 import MenteeRegistrationForm from "@/components/forms/MenteeRegister";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 
 export default function MenteePage({userData}) {
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const {isAuthenticated, loginModalOpen, setLoginModalOpen} = useAuth();
 
   const openRegistrationForm = () => {
-    setShowRegistrationForm(true);
+    if(isAuthenticated){
+      setShowRegistrationForm(true);
+    }else{
+      setLoginModalOpen(!loginModalOpen);
+      return;
+    }
     // Scroll to registration form
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

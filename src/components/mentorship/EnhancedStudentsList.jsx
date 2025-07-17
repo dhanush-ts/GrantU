@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -12,10 +11,9 @@ import {
   Target,
   Lightbulb,
   Building,
-  Mail,
-  Phone,
   MessageSquare,
   Sparkles,
+  Check,
 } from "lucide-react"
 import { fetchWithAuth } from "@/api"
 
@@ -37,7 +35,7 @@ const EnhancedStudentsList = ({ userData, act }) => {
   const fetchStudents = async () => {
     try {
       const token = localStorage.getItem("authToken")
-      const response = await fetchWithAuth("/user/list/", {
+      const response = await fetchWithAuth(`/user/list/?type=${act === "Mentor" ? "mentee" : "mentor"}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -83,7 +81,42 @@ const EnhancedStudentsList = ({ userData, act }) => {
     }
   }
 
+  const acceptRequest = async (studentId) => {
+    try {
+      const token = localStorage.getItem("authToken")
+      const queryParam = act === "Mentor" ? "mentee" : "mentor"
+
+      await fetchWithAuth(`/user/requests/user/${studentId}/?type=${queryParam}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+
+      // Refresh the students list after accepting
+      fetchStudents()
+    } catch (error) {
+      console.error("Error accepting request:", error)
+    }
+  }
+
   const getStatusIcon = (student) => {
+    console.log(student)
+    // First check if user can accept request
+    if (student.can_accept) {
+      return (
+        <Button
+          size="sm"
+          onClick={() => acceptRequest(student.User_ID)}
+          className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+        >
+          <Check className="h-4 w-4 mr-1" />
+          Accept
+        </Button>
+      )
+    }
+
     if (student.your_student) {
       return (
         <div className="flex items-center gap-1 bg-green-100 px-2 py-1 rounded-full">
@@ -92,6 +125,7 @@ const EnhancedStudentsList = ({ userData, act }) => {
         </div>
       )
     }
+
     if (student.your_mentor) {
       return (
         <div className="flex items-center gap-1 bg-blue-100 px-2 py-1 rounded-full">
@@ -100,6 +134,7 @@ const EnhancedStudentsList = ({ userData, act }) => {
         </div>
       )
     }
+
     if (student.request_pending) {
       return (
         <div className="flex items-center gap-1 bg-yellow-100 px-2 py-1 rounded-full">
@@ -108,6 +143,7 @@ const EnhancedStudentsList = ({ userData, act }) => {
         </div>
       )
     }
+
     return (
       <Button
         size="sm"
@@ -233,7 +269,6 @@ const EnhancedStudentsList = ({ userData, act }) => {
                   </div>
                 </div>
               )}
-
             </CardContent>
           </Card>
         ))}

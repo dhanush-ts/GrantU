@@ -564,19 +564,6 @@ const EnhancedStudentsList = ({ userData, act }) => {
                 </div>
               )}
 
-              {/* Contact Info */}
-              {/* <div className="pt-4 border-t border-gray-200 space-y-2">
-                <p className="text-sm text-gray-600 flex items-center gap-2 hover:text-purple-600 transition-colors duration-200">
-                  <Mail className="h-4 w-4" />
-                  {student.Email_Address}
-                </p>
-                {student.Phone_Number && (
-                  <p className="text-sm text-gray-600 flex items-center gap-2 hover:text-purple-600 transition-colors duration-200">
-                    <Phone className="h-4 w-4" />
-                    {student.Phone_Number}
-                  </p>
-                )}
-              </div> */}
             </CardContent>
           </Card>
         ))}

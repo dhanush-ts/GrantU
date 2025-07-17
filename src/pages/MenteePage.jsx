@@ -159,7 +159,7 @@ export default function MenteePage({ userData }) {
                 <div className="flex items-start gap-6 group">
                   <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 animate-pulse">
                     <GraduationCap
-                      className="h-8 w-8 text-purple-600 animate-bounce"
+                      className="h-8 w-8 text-purple-600"
                       style={{ animationDelay: "0.5s" }}
                     />
                   </div>
@@ -177,7 +177,7 @@ export default function MenteePage({ userData }) {
                     className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 animate-pulse"
                     style={{ animationDelay: "1s" }}
                   >
-                    <Users className="h-8 w-8 text-blue-600 animate-bounce" style={{ animationDelay: "1.5s" }} />
+                    <Users className="h-8 w-8 text-blue-600" style={{ animationDelay: "1.5s" }} />
                   </div>
                   <div>
                     <h3 className="text-2xl font-semibold mb-3 text-blue-600">Personalized Learning</h3>
@@ -193,7 +193,7 @@ export default function MenteePage({ userData }) {
                     style={{ animationDelay: "2s" }}
                   >
                     <MessageSquare
-                      className="h-8 w-8 text-green-600 animate-bounce"
+                      className="h-8 w-8 text-green-600"
                       style={{ animationDelay: "2.5s" }}
                     />
                   </div>
@@ -255,7 +255,7 @@ export default function MenteePage({ userData }) {
               <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border-0 hover:scale-105 border-t-4 border-t-purple-500 group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-purple-100 rounded-full -translate-y-10 translate-x-10 animate-pulse" />
                 <CardContent className="pt-10 px-8 pb-8 text-center relative z-10">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 animate-bounce">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                     <UserRound className="h-10 w-10 text-purple-500 animate-pulse" />
                   </div>
                   <h3 className="text-purple-500 text-2xl font-semibold mb-4">Expert Network</h3>
@@ -273,10 +273,10 @@ export default function MenteePage({ userData }) {
                 />
                 <CardContent className="pt-10 px-8 pb-8 text-center relative z-10">
                   <div
-                    className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 animate-bounce"
+                    className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
                     style={{ animationDelay: "0.5s" }}
                   >
-                    <Calendar className="h-10 w-10 text-blue-500 animate-spin" style={{ animationDuration: "4s" }} />
+                    <Calendar className="h-10 w-10 text-blue-500" style={{ animationDuration: "4s" }} />
                   </div>
                   <h3 className="text-blue-500 text-2xl font-semibold mb-4">Flexible Scheduling</h3>
                   <p className="text-gray-600 text-lg leading-relaxed">
@@ -293,7 +293,7 @@ export default function MenteePage({ userData }) {
                 />
                 <CardContent className="pt-10 px-8 pb-8 text-center relative z-10">
                   <div
-                    className="w-20 h-20 rounded-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 animate-bounce"
+                    className="w-20 h-20 rounded-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
                     style={{ animationDelay: "1s" }}
                   >
                     <MessageSquare className="h-10 w-10 text-green-500 animate-pulse" />

@@ -192,7 +192,7 @@ export default function MentorPage({ userData }) {
 
                   <CardContent className="p-6 relative z-10">
                     <div className="flex items-center gap-4 mb-4">
-                      <Avatar className="h-16 w-16 animate-bounce" style={{ animationDelay: `${index * 0.2}s` }}>
+                      <Avatar className="h-16 w-16" style={{ animationDelay: `${index * 0.2}s` }}>
                         <AvatarFallback className="bg-gradient-to-br from-purple-100 to-purple-200 text-purple-600 text-lg font-bold">
                           {mentor.First_Name?.charAt(0)}
                           {mentor.Last_Name?.charAt(0)}
@@ -273,7 +273,7 @@ export default function MentorPage({ userData }) {
               <Card className="bg-white shadow-xl hover:shadow-2xl transition-all duration-500 border-0 hover:scale-105 border-t-4 border-t-red-500 group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-red-100 rounded-full -translate-y-10 translate-x-10 animate-pulse" />
                 <CardContent className="pt-10 px-8 pb-8 text-center relative z-10">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 animate-bounce">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 ">
                     <Heart className="h-10 w-10 text-red-500 animate-pulse" />
                   </div>
                   <h3 className="text-red-600 text-2xl font-semibold mb-4">Make an Impact</h3>
@@ -291,10 +291,10 @@ export default function MentorPage({ userData }) {
                 />
                 <CardContent className="pt-10 px-8 pb-8 text-center relative z-10">
                   <div
-                    className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 animate-bounce"
+                    className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 "
                     style={{ animationDelay: "0.5s" }}
                   >
-                    <BookOpen className="h-10 w-10 text-blue-500 animate-spin" style={{ animationDuration: "4s" }} />
+                    <BookOpen className="h-10 w-10 text-blue-500" style={{ animationDuration: "4s" }} />
                   </div>
                   <h3 className="text-blue-600 text-2xl font-semibold mb-4">Share Knowledge</h3>
                   <p className="text-gray-600 text-lg leading-relaxed">
@@ -311,7 +311,7 @@ export default function MentorPage({ userData }) {
                 />
                 <CardContent className="pt-10 px-8 pb-8 text-center relative z-10">
                   <div
-                    className="w-20 h-20 rounded-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 animate-bounce"
+                    className="w-20 h-20 rounded-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 "
                     style={{ animationDelay: "1s" }}
                   >
                     <Network className="h-10 w-10 text-green-500 animate-pulse" />

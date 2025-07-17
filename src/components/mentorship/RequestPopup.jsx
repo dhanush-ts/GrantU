@@ -80,8 +80,8 @@ const RequestPopup = ({ isOpen, onClose, type, userData }) => {
       <div className="bg-white rounded-lg max-w-4xl w-full max-h-[80vh] overflow-hidden">
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-2xl font-bold text-purple-600">{type === "mentee" ? "Mentee" : "Mentor"} Requests</h2>
-          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full">
-            <X className="h-5 w-5" />
+          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full group">
+            <X className="h-5 w-5 group-hover:rotate-90 transition-transform duration-200" />
           </button>
         </div>
 

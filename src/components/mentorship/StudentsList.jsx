@@ -203,8 +203,8 @@ const StudentsList = ({ userData }) => {
           <div className="bg-white rounded-lg max-w-md w-full p-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-semibold">Send Request to {selectedStudent?.First_Name}</h3>
-              <button onClick={() => setShowRequestModal(false)}>
-                <X className="h-5 w-5" />
+              <button className="group" onClick={() => setShowRequestModal(false)}>
+                <X className="h-5 w-5 group-hover:rotate-90 transition-transform duration-200" />
               </button>
             </div>
 

@@ -191,9 +191,9 @@ export default function MenteeRegistrationForm() {
                 <button
                   type="button"
                   onClick={() => handleRemoveInterest(item)}
-                  className="ml-1 text-purple-600 hover:text-purple-800"
+                  className="ml-1 text-purple-600 hover:text-purple-800 group"
                 >
-                  <X className="w-3 h-3" />
+                  <X className="w-3 h-3 group-hover:rotate-90 transition-transform duration-200" />
                 </button>
               </Badge>
             ))}

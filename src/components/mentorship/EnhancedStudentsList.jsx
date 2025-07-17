@@ -264,9 +264,9 @@ const EnhancedStudentsList = ({ userData, act }) => {
                 </div>
                 <button
                   onClick={() => setShowRequestModal(false)}
-                  className="p-2 hover:bg-white/20 rounded-full transition-colors duration-200"
+                  className="p-2 hover:bg-white/20 rounded-full transition-colors duration-200 group"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5 group-hover:rotate-90 transition-transform duration-200" />
                 </button>
               </div>
             </div>

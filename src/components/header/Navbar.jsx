@@ -151,9 +151,9 @@ const Navbar = () => {
               <div className="relative w-full max-w-md">
                 <button 
                   onClick={closeRegistrationForm}
-                  className="absolute top-2 right-2 p-1 text-gray-700 bg-white rounded-full hover:bg-gray-100"
+                  className="absolute top-2 right-2 p-1 text-gray-700 bg-white rounded-full hover:bg-gray-100 group"
                 >
-                  <X size={24} />
+                  <X size={24} className='group-hover:rotate-90 transition-transform duration-200' />
                 </button>
                 {registrationType === 'mentee' && <MenteeRegistrationForm onClose={closeRegistrationForm} />}
                 {registrationType === 'mentor' && <MentorRegistrationForm onClose={closeRegistrationForm} />}
@@ -259,8 +259,8 @@ const Navbar = () => {
         )} */}
 
         {/* Mobile Hamburger Button */}
-        <button className="text-blue-800 md:hidden focus:outline-none" onClick={toggleMenu}>
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        <button className="text-blue-800 md:hidden focus:outline-none group" onClick={toggleMenu}>
+          {isMenuOpen ? <X size={24} className='group-hover:rotate-90 transition-transform duration-200' /> : <Menu size={24} />}
         </button>
       </nav>
 

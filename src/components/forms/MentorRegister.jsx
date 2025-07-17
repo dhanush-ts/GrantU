@@ -141,9 +141,9 @@ export default function MentorRegistrationForm() {
                 <button
                   type="button"
                   onClick={() => handleRemoveExpertise(item)}
-                  className="ml-1 text-purple-600 hover:text-purple-800"
+                  className="ml-1 text-purple-600 hover:text-purple-800 group"
                 >
-                  <X size={14} />
+                  <X size={14} className="group-hover:rotate-90 transition-transform duration-200" />
                 </button>
               </span>
             ))}

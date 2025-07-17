@@ -167,7 +167,7 @@ const EnhancedStudentsList = ({ userData, act }) => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="">
       {/* Header */}
       <div className="text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">Connect with Amazing People</h2>
@@ -175,7 +175,7 @@ const EnhancedStudentsList = ({ userData, act }) => {
       </div>
 
       {/* Students Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid mt-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {students.map((student, index) => (
           <Card
             key={student.User_ID}

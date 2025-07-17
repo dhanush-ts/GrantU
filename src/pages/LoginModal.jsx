@@ -8,7 +8,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from 'react-router-dom';
-import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { api, fetchWithAuth } from '@/api';
 import { PassField } from '@/constants/PassField';
@@ -19,7 +18,6 @@ import { useAuth } from '@/context/AuthContext';
 const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { setIsAuthenticated, verifyUser} = useAuth();
@@ -46,7 +44,7 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
       let data;
       if (contentType.includes("application/json")) {
         data = await response.json();
-      } else {
+      } else { 
         const text = await response.text();
         console.log(text);
         throw new Error("Server returned an invalid response format");
@@ -61,6 +59,10 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
       onLoginSuccess(data);
       onOpenChange(false);
       setIsAuthenticated(true);
+      if(!data.verified){
+        navigate('/verify-otp');
+        return;
+      }
       navigate('/scholarships');
     } catch (error) {
       console.error("Login error:", error);

@@ -641,6 +641,20 @@ const MyConnections = ({ userData, type, act }) => {
 
   const scheduleMeeting = async () => {
     try {
+      const convertToUtcZ = (localTimeStr) => {
+        const localDate = new Date(localTimeStr);
+        // Add 5 hours 30 minutes to convert from IST to UTC
+        localDate.setMinutes(localDate.getMinutes() + 330);
+        return localDate.toISOString().split(".")[0] + "Z";
+      };
+
+      const formattedForm = {
+        Booking: meetingForm.Booking,
+        Meeting_Start_Time: convertToUtcZ(meetingForm.Meeting_Start_Time),
+        Meeting_End_Time: convertToUtcZ(meetingForm.Meeting_End_Time),
+        Description: meetingForm.Description || "Want to learn things !"
+      };
+      console.log(formattedForm)
       const token = localStorage.getItem("authToken")
       const response = await fetchWithAuth("/user/schedule-meeting/", {
         method: "POST",
@@ -648,7 +662,7 @@ const MyConnections = ({ userData, type, act }) => {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(meetingForm),
+        body: JSON.stringify(formattedForm),
       })
 
       if (response.status === 203) {

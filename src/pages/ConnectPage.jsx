@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { UserRound, Calendar, MessageSquare, Bell, Users, GraduationCap, Info, User } from "lucide-react"
+import { UserRound, Calendar, MessageSquare, Bell, Users, GraduationCap, Info, User, ArrowLeft } from "lucide-react"
 import { useAuth } from "@/context/AuthContext"
 import RequestPopup from "@/components/mentorship/RequestPopup"
 import EnhancedStudentsList from "@/components/mentorship/EnhancedStudentsList"
@@ -330,20 +330,21 @@ export default function MentorshipPlatform() {
         </div>
 
         {/* Main Content */}
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-4">
           {showMyConnections ? (
             <div>
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-3xl font-bold text-purple-600">
                   My {connectionsType === "students" ? "Students" : "Mentors"}
                 </h2>
-                <Button
-                  variant="outline"
-                  onClick={() => setShowMyConnections(false)}
-                  className="border-2 border-purple-200 hover:border-purple-400 hover:text-purple-600 transition-all duration-300"
-                >
-                  Back to {activeTab === "Mentor" ? "Learning" : "Teaching"} Dashboard
-                </Button>
+            <Button
+              variant="ghost"
+              className="mb-2 sm:mb-4 text-purple-600 hover:text-purple-700 hover:bg-purple-50 p-2 sm:p-3"
+              onClick={() => setShowMyConnections(false)}
+            >
+              <ArrowLeft className="h-4 w-4 mr-1 sm:mr-2" />
+              <span className="text-sm sm:text-base">Back to {activeTab === "Mentor" ? "Learning" : "Teaching"} Dashboard</span>
+            </Button>
               </div>
               <MyConnections act={activeTab} userData={userData} type={connectionsType} />
             </div>

@@ -2,16 +2,29 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { User, UserCheck, Clock, Send, X, Target, Lightbulb, Building, MessageSquare, Check, Loader2 } from 'lucide-react'
+import {
+  User,
+  UserCheck,
+  Clock,
+  Send,
+  X,
+  Target,
+  Lightbulb,
+  Building,
+  MessageSquare,
+  Check,
+  Loader2,
+} from "lucide-react"
 import { fetchWithAuth } from "@/api"
 import FieldOfInterestSelector from "@/constants/FieldOfInterestSelector"
 
-export const EnhancedStudentsList = ({ userData, act }) => {
+const EnhancedStudentsList = ({ userData, act }) => {
   const [students, setStudents] = useState([])
   const [loading, setLoading] = useState(true)
   const [showRequestModal, setShowRequestModal] = useState(false)
   const [selectedStudent, setSelectedStudent] = useState(null)
   const [buttonLoading, setButtonLoading] = useState({})
+  const [formErrors, setFormErrors] = useState({})
   const [requestData, setRequestData] = useState({
     description: "",
     details: "",
@@ -40,8 +53,25 @@ export const EnhancedStudentsList = ({ userData, act }) => {
     }
   }
 
+  const validateForm = () => {
+    const errors = {}
+    if (!requestData.description.trim()) {
+      errors.description = "Description is required"
+    }
+    if (!requestData.details.trim()) {
+      errors.details = "Details are required"
+    }
+    if (requestData.interests.length === 0) {
+      errors.interests = "At least one field of interest is required"
+    }
+    setFormErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
   const sendRequest = async () => {
-    setButtonLoading(prev => ({ ...prev, sendRequest: true }))
+    if (!validateForm()) return
+
+    setButtonLoading((prev) => ({ ...prev, sendRequest: true }))
     try {
       const token = localStorage.getItem("authToken")
       const payload = {
@@ -61,16 +91,17 @@ export const EnhancedStudentsList = ({ userData, act }) => {
       })
       setShowRequestModal(false)
       setRequestData({ description: "", details: "", interests: [] })
+      setFormErrors({})
       fetchStudents()
     } catch (error) {
       console.error("Error sending request:", error)
     } finally {
-      setButtonLoading(prev => ({ ...prev, sendRequest: false }))
+      setButtonLoading((prev) => ({ ...prev, sendRequest: false }))
     }
   }
 
   const acceptRequest = async (studentId) => {
-    setButtonLoading(prev => ({ ...prev, [studentId]: true }))
+    setButtonLoading((prev) => ({ ...prev, [studentId]: true }))
     try {
       const token = localStorage.getItem("authToken")
       const queryParam = act === "Mentor" ? "mentee" : "mentor"
@@ -85,7 +116,7 @@ export const EnhancedStudentsList = ({ userData, act }) => {
     } catch (error) {
       console.error("Error accepting request:", error)
     } finally {
-      setButtonLoading(prev => ({ ...prev, [studentId]: false }))
+      setButtonLoading((prev) => ({ ...prev, [studentId]: false }))
     }
   }
 
@@ -96,24 +127,19 @@ export const EnhancedStudentsList = ({ userData, act }) => {
 
   const renderListItems = (items, maxVisible = 4) => {
     if (!items || items.length === 0) return <span className="text-gray-500 text-sm">Not mentioned</span>
-    
+
     const visibleItems = items.slice(0, maxVisible)
     const remainingCount = items.length - maxVisible
 
     return (
       <div className="flex flex-wrap gap-1">
         {visibleItems.map((item, idx) => (
-          <span
-            key={idx}
-            className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs border"
-          >
+          <span key={idx} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs border">
             {item}
           </span>
         ))}
         {remainingCount > 0 && (
-          <span className="bg-gray-200 text-gray-600 px-2 py-1 rounded text-xs border">
-            +{remainingCount} more
-          </span>
+          <span className="bg-gray-200 text-gray-600 px-2 py-1 rounded text-xs border">+{remainingCount} more</span>
         )}
       </div>
     )
@@ -126,7 +152,7 @@ export const EnhancedStudentsList = ({ userData, act }) => {
           size="sm"
           onClick={() => acceptRequest(student.User_ID)}
           disabled={buttonLoading[student.User_ID]}
-          className="bg-green-600 hover:bg-green-700 text-white"
+          className="bg-green-600 hover:bg-green-700 text-white border-0"
         >
           {buttonLoading[student.User_ID] ? (
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -223,7 +249,6 @@ export const EnhancedStudentsList = ({ userData, act }) => {
               </div>
 
               <div className="space-y-4">
-                {/* Expertise Section */}
                 <div>
                   <h4 className="font-medium text-gray-700 mb-2 flex items-center gap-1">
                     <Target className="h-4 w-4" />
@@ -232,7 +257,6 @@ export const EnhancedStudentsList = ({ userData, act }) => {
                   {renderListItems(student.Expertise)}
                 </div>
 
-                {/* Interests Section */}
                 <div>
                   <h4 className="font-medium text-gray-700 mb-2 flex items-center gap-1">
                     <Lightbulb className="h-4 w-4" />
@@ -241,16 +265,13 @@ export const EnhancedStudentsList = ({ userData, act }) => {
                   {renderListItems(student.Field_of_Interest)}
                 </div>
 
-                {/* Requirements Section */}
                 <div>
                   <h4 className="font-medium text-gray-700 mb-2 flex items-center gap-1">
                     <MessageSquare className="h-4 w-4" />
                     Looking for
                   </h4>
                   <div className="bg-gray-50 p-3 rounded border">
-                    <p className="text-sm text-gray-700">
-                      {truncateText(student.Requirements)}
-                    </p>
+                    <p className="text-sm text-gray-700">{truncateText(student.Requirements)}</p>
                   </div>
                 </div>
               </div>
@@ -266,13 +287,14 @@ export const EnhancedStudentsList = ({ userData, act }) => {
             <div className="bg-blue-600 text-white p-4 rounded-t-lg">
               <div className="flex justify-between items-center">
                 <div>
-                  <h3 className="text-lg font-semibold">
-                    Connect with {selectedStudent?.First_Name}
-                  </h3>
+                  <h3 className="text-lg font-semibold">Connect with {selectedStudent?.First_Name}</h3>
                   <p className="text-blue-100 text-sm">Send a connection request</p>
                 </div>
                 <button
-                  onClick={() => setShowRequestModal(false)}
+                  onClick={() => {
+                    setShowRequestModal(false)
+                    setFormErrors({})
+                  }}
                   className="p-1 hover:bg-white/20 rounded"
                 >
                   <X className="h-5 w-5" />
@@ -283,40 +305,71 @@ export const EnhancedStudentsList = ({ userData, act }) => {
             <div className="p-4 space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-1 text-gray-700">
-                  Description
+                  Description <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={requestData.description}
-                  onChange={(e) => setRequestData({ ...requestData, description: e.target.value })}
-                  className="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none"
+                  onChange={(e) => {
+                    setRequestData({ ...requestData, description: e.target.value })
+                    if (formErrors.description) {
+                      setFormErrors({ ...formErrors, description: "" })
+                    }
+                  }}
+                  className={`w-full p-2 border rounded focus:outline-none ${
+                    formErrors.description
+                      ? "border-red-500 focus:border-red-500"
+                      : "border-gray-300 focus:border-blue-500"
+                  }`}
                   placeholder="Brief description of your request"
                 />
+                {formErrors.description && <p className="text-red-500 text-xs mt-1">{formErrors.description}</p>}
               </div>
 
               <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700">
+                  Field of Interest <span className="text-red-500">*</span>
+                </label>
                 <FieldOfInterestSelector
                   value={requestData.interests}
-                  onChange={(interests) => setRequestData({ ...requestData, interests })}
+                  onChange={(interests) => {
+                    setRequestData({ ...requestData, interests })
+                    if (formErrors.interests) {
+                      setFormErrors({ ...formErrors, interests: "" })
+                    }
+                  }}
                   placeholder="Search or add interests..."
-                  inputClassName="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none"
+                  inputClassName={`w-full p-2 border rounded focus:outline-none ${
+                    formErrors.interests
+                      ? "border-red-500 focus:border-red-500"
+                      : "border-gray-300 focus:border-blue-500"
+                  }`}
                   buttonClassName="rounded-r px-3 py-2"
                   dropdownClassName="border border-gray-300 rounded shadow-lg"
                   labelClassName="text-sm font-medium mb-1 text-gray-700"
                   badgeClassName="px-2 py-1 rounded"
                 />
+                {formErrors.interests && <p className="text-red-500 text-xs mt-1">{formErrors.interests}</p>}
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-1 text-gray-700">
-                  Details
+                  Details <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   value={requestData.details}
-                  onChange={(e) => setRequestData({ ...requestData, details: e.target.value })}
-                  className="w-full p-2 border border-gray-300 rounded h-20 focus:border-blue-500 focus:outline-none resize-none"
+                  onChange={(e) => {
+                    setRequestData({ ...requestData, details: e.target.value })
+                    if (formErrors.details) {
+                      setFormErrors({ ...formErrors, details: "" })
+                    }
+                  }}
+                  className={`w-full p-2 border rounded h-20 focus:outline-none resize-none ${
+                    formErrors.details ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-blue-500"
+                  }`}
                   placeholder="Detailed information about what you need help with"
                 />
+                {formErrors.details && <p className="text-red-500 text-xs mt-1">{formErrors.details}</p>}
               </div>
 
               <div className="flex gap-2 pt-2">
@@ -334,7 +387,10 @@ export const EnhancedStudentsList = ({ userData, act }) => {
                 </Button>
                 <Button
                   variant="outline"
-                  onClick={() => setShowRequestModal(false)}
+                  onClick={() => {
+                    setShowRequestModal(false)
+                    setFormErrors({})
+                  }}
                   className="flex-1"
                 >
                   Cancel

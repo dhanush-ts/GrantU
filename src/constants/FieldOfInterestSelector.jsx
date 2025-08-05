@@ -15,7 +15,7 @@ export default function FieldOfInterestSelector({
   badgeClassName = "",
   containerClassName = "",
   showLabel = true,
-  labelText = "Field of Interest",
+  labelText = "",
   labelClassName = ""
 }) {
   const [inputValue, setInputValue] = useState("");
@@ -68,7 +68,7 @@ export default function FieldOfInterestSelector({
           <Button
             type="button"
             onClick={() => handleAdd(inputValue)}
-            className={`rounded-l-none bg-purple-600 hover:bg-purple-700 ${buttonClassName}`}
+            className={`rounded-l-none bg-purple-600 hover:bg-purple-700 ${buttonClassName} py-5 px-3 border rounded-r-lg`}
           >
             <Check className="w-4 h-4" />
           </Button>

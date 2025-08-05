@@ -1,4 +1,6 @@
 import { GraduationCap, Users, MessageSquare, User } from "lucide-react"
+import teacher from "@/assets/teacher.json"
+import { Player } from "@lottiefiles/react-lottie-player"
 
 export const HowItWorksSection = () => {
   const features = [
@@ -26,13 +28,13 @@ export const HowItWorksSection = () => {
   ]
 
   return (
-    <section className="py-16">
+    <section className="">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">How Our Platform Works</h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
           A simple yet powerful system designed to foster meaningful mentorship relationships
         </p>
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
           <div className="space-y-8">
             {features.map((feature, index) => {
               const Icon = feature.icon
@@ -52,11 +54,13 @@ export const HowItWorksSection = () => {
             })}
           </div>
           <div className="relative">
-            <div className="bg-gray-100 rounded-2xl p-8 text-center">
-              <div className="w-24 h-24 bg-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <User className="h-12 w-12 text-white" />
-              </div>
-              <h4 className="text-xl font-semibold">You</h4>
+            <div className="max-w-md mx-auto rounded-lg overflow-hidden shadow-lg">
+              <Player
+                  autoplay
+                  loop
+                  src={teacher}
+                  style={{ height: '100%', width: '100%'  }}
+                  />
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ export const HeroSection = ({ onGetStarted }) => {
           Join our mentorship ecosystem where knowledge flows freely. Mentors guide up to 3 mentees, while learners
           connect with up to 5 mentors.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col w-full sm:flex-row items-center justify-center gap-4">
           <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3" onClick={onGetStarted}>
             Get Started
           </Button>

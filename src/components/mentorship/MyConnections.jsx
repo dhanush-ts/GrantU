@@ -14,7 +14,7 @@ import ProfileModal from "./ProfileModal"
 import CombinedMeetingsTable from "./CombinedMeetingsTable"
 import FreeTimeManager from "./FreeTimeManager"
 
-export default function MyConnections({ userData, type, act }) {
+export default function MyConnections({ userData, type, act, setShowMyConnections }) {
   const [connections, setConnections] = useState([])
   const [loading, setLoading] = useState(true)
   const [showAddModal, setShowAddModal] = useState(false)
@@ -200,13 +200,14 @@ export default function MyConnections({ userData, type, act }) {
     setShowProfileModal(true)
   }
 
+
   const renderEmptySlots = () => {
     const emptySlots = Math.max(0, maxConnections - connections.length)
     return Array.from({ length: emptySlots }, (_, index) => (
       <Card
         key={`empty-${index}`}
         className="h-full border-2 border-dashed border-purple-300 hover:border-purple-400 transition-colors duration-200 cursor-pointer bg-purple-50 hover:bg-purple-100"
-        onClick={() => setShowAddModal(true)}
+        onClick={() => setShowMyConnections(false)}
       >
         <CardContent className="p-4 sm:p-6 flex flex-col items-center justify-center h-full">
           <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-200 rounded-full flex items-center justify-center mb-3 sm:mb-4">

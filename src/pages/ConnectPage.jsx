@@ -63,7 +63,7 @@ export default function MentorshipPlatform() {
                 activeTab={activeTab}
                 onBack={() => setShowMyConnections(false)}
               />
-              <MyConnections act={activeTab} userData={userData} type={connectionsType} />
+              <MyConnections act={activeTab} setShowMyConnections={setShowMyConnections} userData={userData} type={connectionsType} />
             </div>
           ) : (
             <>

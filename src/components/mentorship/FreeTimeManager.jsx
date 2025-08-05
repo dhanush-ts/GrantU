@@ -27,7 +27,7 @@ export default function FreeTimeManager({ freeTime, onCreateSlot, onDeleteSlot }
 
   return (
     <div className="space-y-6">
-      <Card className="border-blue-200">
+      <Card className="border-blue-200 max-w-xl mx-auto">
         <CardHeader>
           <CardTitle className="text-lg text-blue-700 flex items-center gap-2">
             <Plus className="h-5 w-5" />
@@ -35,7 +35,7 @@ export default function FreeTimeManager({ freeTime, onCreateSlot, onDeleteSlot }
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <div className="flex gap-4 mb-4">
             <Select value={newSlot.Day} onValueChange={(value) => setNewSlot({ ...newSlot, Day: value })}>
               <SelectTrigger>
                 <SelectValue placeholder="Select Day" />
@@ -50,6 +50,7 @@ export default function FreeTimeManager({ freeTime, onCreateSlot, onDeleteSlot }
             </Select>
 
             <Input
+              className="w-24"
               type="time"
               value={newSlot.Start_Time}
               onChange={(e) => setNewSlot({ ...newSlot, Start_Time: e.target.value })}
@@ -57,6 +58,7 @@ export default function FreeTimeManager({ freeTime, onCreateSlot, onDeleteSlot }
             />
 
             <Input
+              className="w-24"
               type="time"
               value={newSlot.End_Time}
               onChange={(e) => setNewSlot({ ...newSlot, End_Time: e.target.value })}

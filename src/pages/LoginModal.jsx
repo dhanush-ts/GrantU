@@ -88,19 +88,6 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
           />
 
           <div className="relative">
-            {/* <Input
-              placeholder="Password"
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(prev => !prev)}
-              className="absolute right-3 top-1/2 text-gray-500 -translate-y-1/2 hover:text-gray-700"
-            >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-            </button> */}
             <PassField password={password} setPassword={setPassword} />
           </div>
 
@@ -113,6 +100,28 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
               Login
             </Button>
           </div>
+
+          <div className="flex items-center my-4">
+            <div className="flex-grow border-t border-gray-300"></div>
+            <span className="mx-4 text-gray-500">or</span>
+            <div className="flex-grow border-t border-gray-300"></div>
+          </div>
+
+          <Button className="mx-auto w-full" asChild>
+            <a
+              href="http://localhost:8000/api/auth/login/google-oauth2/"
+              className="flex items-center justify-center mx-auto gap-3 px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-md hover:bg-gray-50 transition duration-200"
+            >
+              <img
+                src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                alt="Google logo"
+                className="w-5 h-5"
+              />
+              <span className="text-sm font-medium text-gray-700">Sign in with Google</span>
+            </a>
+          </Button>
+
+
 
           <div className="text-xs text-center text-gray-500">
             By logging in, you agree to our{" "}

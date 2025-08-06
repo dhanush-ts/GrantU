@@ -26,12 +26,12 @@ export default function MyConnections({ userData, type, act, setShowMyConnection
   const [meetings, setMeetings] = useState({ upcoming: [], completed: [] })
   const [mentorFreeTime, setMentorFreeTime] = useState({})
   const [meetingForm, setMeetingForm] = useState({
-    Booking: "",
+    Connection: "",
     Meeting_Start_Time: "",
     Meeting_End_Time: "",
     Description: "",
   })
-  const [bookingError, setBookingError] = useState(null)
+  const [ConnectionError, setConnectionError] = useState(null)
 
   const maxConnections = type === "students" ? 3 : 5
   const isMentor = type === "students"
@@ -150,7 +150,7 @@ export default function MyConnections({ userData, type, act, setShowMyConnection
       }
 
       const formattedForm = {
-        Booking: meetingForm.Booking,
+        Connection: meetingForm.Connection,
         Meeting_Start_Time: convertToUtcZ(meetingForm.Meeting_Start_Time),
         Meeting_End_Time: convertToUtcZ(meetingForm.Meeting_End_Time),
         Description: meetingForm.Description || "Want to learn things!",
@@ -168,12 +168,12 @@ export default function MyConnections({ userData, type, act, setShowMyConnection
 
       if (response.status === 203) {
         const errorData = await response.json()
-        setBookingError(errorData)
+        setConnectionError(errorData)
         return
       }
 
-      setMeetingForm({ Booking: "", Meeting_Start_Time: "", Meeting_End_Time: "", Description: "" })
-      setBookingError(null)
+      setMeetingForm({ Connection: "", Meeting_Start_Time: "", Meeting_End_Time: "", Description: "" })
+      setConnectionError(null)
       fetchMeetings()
       setShowMeetingModal(false)
     } catch (error) {
@@ -183,7 +183,7 @@ export default function MyConnections({ userData, type, act, setShowMyConnection
 
   const handleScheduleMeeting = (connection) => {
     setSelectedConnection(connection)
-    setMeetingForm({ ...meetingForm, Booking: connection.Booking_ID })
+    setMeetingForm({ ...meetingForm, Connection: connection.Connection_ID })
 
     if (!isMentor && connection.Mentor) {
       fetchFreeTime(connection.Mentor.User_ID)
@@ -277,7 +277,7 @@ export default function MyConnections({ userData, type, act, setShowMyConnection
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {connections.map((connection) => (
               <ConnectionCard
-                key={connection.Booking_ID}
+                key={connection.Connection_ID}
                 connection={connection}
                 type={type}
                 onScheduleMeeting={handleScheduleMeeting}
@@ -329,14 +329,14 @@ export default function MyConnections({ userData, type, act, setShowMyConnection
               </DialogHeader>
 
               <div className="space-y-6">
-                {bookingError && (
+                {ConnectionError && (
                   <Card className="border-red-200 bg-red-50">
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 text-red-600 mb-2">
                         <AlertCircle className="h-5 w-5" />
-                        <span className="font-medium">Booking Conflict</span>
+                        <span className="font-medium">Connection Conflict</span>
                       </div>
-                      <p className="text-red-700">{bookingError.error}</p>
+                      <p className="text-red-700">{ConnectionError.error}</p>
                     </CardContent>
                   </Card>
                 )}

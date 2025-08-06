@@ -111,7 +111,7 @@ const SignupPage = ({onOpenLogin}) => {
     if (!validateForm()) return;
     setLoading(true);
     try {
-      const response = await fetchWithAuth(`${api}/api/auth/register-request/`, {
+      const response = await fetchWithAuth(`/auth/register-request/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

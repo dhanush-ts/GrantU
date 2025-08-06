@@ -18,7 +18,7 @@ import {
 import { fetchWithAuth } from "@/api"
 import FieldOfInterestSelector from "@/constants/FieldOfInterestSelector"
 
-const EnhancedStudentsList = ({ userData, act }) => {
+const EnhancedStudentsList = ({ act }) => {
   const [students, setStudents] = useState([])
   const [loading, setLoading] = useState(true)
   const [showRequestModal, setShowRequestModal] = useState(false)
@@ -81,7 +81,7 @@ const EnhancedStudentsList = ({ userData, act }) => {
         Selection_By: act === "Mentor" ? "mentee" : "mentor",
         Interests: requestData.interests,
       }
-      await fetchWithAuth("/user/booking/", {
+      await fetchWithAuth("/user/connection/", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

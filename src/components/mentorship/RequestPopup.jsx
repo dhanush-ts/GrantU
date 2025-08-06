@@ -36,11 +36,11 @@ export const RequestPopup = ({ isOpen, onClose, type, userData }) => {
     }
   }
 
-  const handleAccept = async (bookingId) => {
-    setButtonLoading((prev) => ({ ...prev, [`accept_${bookingId}`]: true }))
+  const handleAccept = async (ConnectionId) => {
+    setButtonLoading((prev) => ({ ...prev, [`accept_${ConnectionId}`]: true }))
     try {
       const token = localStorage.getItem("authToken")
-      await fetchWithAuth(`/user/requests/${bookingId}/`, {
+      await fetchWithAuth(`/user/requests/${ConnectionId}/`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -51,15 +51,15 @@ export const RequestPopup = ({ isOpen, onClose, type, userData }) => {
     } catch (error) {
       console.error("Error accepting request:", error)
     } finally {
-      setButtonLoading((prev) => ({ ...prev, [`accept_${bookingId}`]: false }))
+      setButtonLoading((prev) => ({ ...prev, [`accept_${ConnectionId}`]: false }))
     }
   }
 
-  const handleReject = async (bookingId) => {
-    setButtonLoading((prev) => ({ ...prev, [`reject_${bookingId}`]: true }))
+  const handleReject = async (ConnectionId) => {
+    setButtonLoading((prev) => ({ ...prev, [`reject_${ConnectionId}`]: true }))
     try {
       const token = localStorage.getItem("authToken")
-      await fetchWithAuth(`/user/requests/reject/${bookingId}/`, {
+      await fetchWithAuth(`/user/requests/reject/${ConnectionId}/`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ export const RequestPopup = ({ isOpen, onClose, type, userData }) => {
     } catch (error) {
       console.error("Error rejecting request:", error)
     } finally {
-      setButtonLoading((prev) => ({ ...prev, [`reject_${bookingId}`]: false }))
+      setButtonLoading((prev) => ({ ...prev, [`reject_${ConnectionId}`]: false }))
     }
   }
 
@@ -126,7 +126,7 @@ export const RequestPopup = ({ isOpen, onClose, type, userData }) => {
               {requests.map((request) => {
                 const person = type === "mentee" ? request.Mentor : request.Mentee
                 return (
-                  <Card key={request.Booking_ID} className="border border-gray-200">
+                  <Card key={request.Connection_ID} className="border border-gray-200">
                     <CardContent className="p-4">
                       <div className="grid lg:grid-cols-2 gap-4">
                         {/* Person Info */}
@@ -189,22 +189,22 @@ export const RequestPopup = ({ isOpen, onClose, type, userData }) => {
                             {request.can_accept ? (
                               <>
                                 <Button
-                                  onClick={() => handleAccept(request.Booking_ID)}
-                                  disabled={buttonLoading[`accept_${request.Booking_ID}`]}
+                                  onClick={() => handleAccept(request.Connection_ID)}
+                                  disabled={buttonLoading[`accept_${request.Connection_ID}`]}
                                   className="bg-green-600 hover:bg-green-700 text-white flex-1"
                                 >
-                                  {buttonLoading[`accept_${request.Booking_ID}`] ? (
+                                  {buttonLoading[`accept_${request.Connection_ID}`] ? (
                                     <Loader2 className="h-4 w-4 animate-spin mr-2" />
                                   ) : null}
                                   Accept
                                 </Button>
                                 <Button
-                                  onClick={() => handleReject(request.Booking_ID)}
-                                  disabled={buttonLoading[`reject_${request.Booking_ID}`]}
+                                  onClick={() => handleReject(request.Connection_ID)}
+                                  disabled={buttonLoading[`reject_${request.Connection_ID}`]}
                                   variant="outline"
                                   className="border-red-500 text-red-500 hover:bg-red-50 flex-1"
                                 >
-                                  {buttonLoading[`reject_${request.Booking_ID}`] ? (
+                                  {buttonLoading[`reject_${request.Connection_ID}`] ? (
                                     <Loader2 className="h-4 w-4 animate-spin mr-2" />
                                   ) : null}
                                   Reject

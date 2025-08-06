@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Navbar from './components/header/Navbar';
 import LandingPage from './pages/LandingPage';
 import SignupPage from './pages/SignupPage';
@@ -15,7 +15,8 @@ import MentorshipPlatform  from './pages/ConnectPage';
 import robot from './assets/robot.json'
 import { Player } from '@lottiefiles/react-lottie-player';
 import ChatPopup from './components/home/ChatPopup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchWithAuth } from './api';
 
 
 function App() {

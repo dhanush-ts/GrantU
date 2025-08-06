@@ -6,10 +6,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { UserRound, BookOpen, GraduationCap, Lightbulb } from "lucide-react"
 import Image from "../assets/landing_img-1.png"
 import Footer from "@/components/header/Footer"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import LoginPage from "../pages/LoginModal"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import StatsSection from "../components/home/StatSection"
+import { fetchWithAuth } from "@/api"
 
 export default function LandingPage({ data }) {
   const [loginModalOpen, setLoginModalOpen] = useState(false)
@@ -17,6 +18,36 @@ export default function LandingPage({ data }) {
     e.preventDefault() // Prevent navigation
     setLoginModalOpen(true)
   }
+
+  const navigate = useNavigate();
+  
+    useEffect(() => {
+      const query = new URLSearchParams(location.search);
+      const token = query.get('token');
+      const newUser = query.get('new_user');
+  
+      if (token) {
+        localStorage.setItem('authToken',token);
+        fetchWithAuth('/user/profile/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then(res => res.json())
+          .then(data => {
+            setUserData({ ...data, token });
+            if (newUser === 'true') {
+              console.log('New user signed up!');
+            }
+            navigate('/');
+          })
+          .catch(err => {
+            console.error('Token auth failed:', err);
+            navigate('/');
+          });
+      }
+    }, [location.search]);
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <main className="flex-grow">

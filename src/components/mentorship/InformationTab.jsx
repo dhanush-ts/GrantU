@@ -1,5 +1,5 @@
 import { HeroSection } from "./HeroSection"
-import { HowItWorksSection } from "./HowItWorksSection"
+import { HowItWorksSection } from "./HowItworksSection" 
 import { BenefitsSection } from "./BenifitsSection" 
 
 export const InformationTab = ({ userData, onGetStarted }) => {

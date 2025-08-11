@@ -32,4 +32,4 @@ jobs:
         run: npm run build
         
       - name: Sync build folder to S3
-        run: aws s3 sync build/ s3://${{ secrets.REACT_S3_BUCKET }} --delete
+        run: aws s3 sync dist/ s3://${{ secrets.REACT_S3_BUCKET }} --delete

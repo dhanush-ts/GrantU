@@ -17,6 +17,7 @@ import { Player } from '@lottiefiles/react-lottie-player';
 import ChatPopup from './components/home/ChatPopup';
 import { useEffect, useState } from 'react';
 import { fetchWithAuth } from './api';
+import { Feedback } from './pages/Feedback';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/connect" element={<MentorshipPlatform />} />
             <Route path="/verify-otp" element={<VerifyOtpPage />} />
+            <Route path="/feedbacks/:id" element={<Feedback />} />
           </Routes>
         </main>
       </div>

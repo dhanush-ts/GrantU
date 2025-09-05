@@ -518,7 +518,7 @@ const Navbar = () => {
       <LoginPage open={loginModalOpen} onOpenChange={setLoginModalOpen} onLoginSuccess={handleLoginSuccess} />
 
       {/* Spacer for fixed header */}
-      <div className="h-20"></div>
+      <div className="h-24 mb-3"></div>
     </>
   )
 }

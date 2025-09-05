@@ -92,7 +92,7 @@ export default function MyConnections({ userData, type, act, setShowMyConnection
   const fetchMeetings = async () => {
     try {
       const token = localStorage.getItem("authToken")
-      const response = await fetchWithAuth("/user/schedule-meeting/", {
+      const response = await fetchWithAuth(`/user/schedule-meeting?type=${type === "students"?"mentor":"mentee"}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

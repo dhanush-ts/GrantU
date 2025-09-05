@@ -13,8 +13,6 @@ import { api, fetchWithAuth } from '@/api';
 import { PassField } from '@/constants/PassField';
 import { useAuth } from '@/context/AuthContext';
 
-
-
 const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -120,8 +118,6 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
               <span className="text-sm font-medium text-gray-700">Sign in with Google</span>
             </a>
           </Button>
-
-
 
           <div className="text-xs text-center text-gray-500">
             By logging in, you agree to our{" "}

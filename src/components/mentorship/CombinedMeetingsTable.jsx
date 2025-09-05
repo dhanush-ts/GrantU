@@ -265,7 +265,7 @@ export default function CombinedMeetingsTable({ meetings }) {
                     </div>
 
                     <div className="text-sm font-medium text-gray-900">
-                      {isMentor ? meeting.Mentee : meeting.Mentee}
+                      {isMentor ? meeting.Mentee : meeting.Mentor}
                     </div>
 
                     <div className="text-sm text-gray-700 line-clamp-2">{meeting.Description || "No description"}</div>

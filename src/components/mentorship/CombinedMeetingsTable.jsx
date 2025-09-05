@@ -11,8 +11,9 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Search, Video, Calendar, User, Filter, X, MessageSquare, Star, Send, Eye, Clock } from "lucide-react"
 import { fetchWithAuth } from "@/api"
+import { toast } from "sonner"
 
-export default function CombinedMeetingsTable({ meetings }) {
+export default function CombinedMeetingsTable({ meetings, fetchMeetings }) {
   const isMentor = localStorage.getItem("mentorship-active-tab") == "Mentee"
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
@@ -66,13 +67,12 @@ export default function CombinedMeetingsTable({ meetings }) {
 
       if (response.ok) {
         // You might want to refresh the meetings data here
-        alert("Feedback request sent successfully!")
+        toast("Feedback request sent successfully!")
       } else {
-        alert("Failed to send feedback request")
+        toast("Failed to send feedback request")
       }
     } catch (error) {
-      console.error("Error requesting feedback:", error)
-      alert("Error sending feedback request")
+      toast("Error sending feedback request")
     } finally {
       setIsSubmitting(false)
     }
@@ -95,13 +95,11 @@ export default function CombinedMeetingsTable({ meetings }) {
       if (response.ok) {
         setFeedbackDialog({ open: false, meeting: null, type: null })
         setFeedbackForm({ rating: 5, comments: "" })
-        // You might want to refresh the meetings data here
-      } else {
-        alert("Failed to submit feedback")
+        fetchMeetings();
+        toast("Successfully submitted feedback!")
       }
     } catch (error) {
-      console.error("Error submitting feedback:", error)
-      alert("Error submitting feedback")
+      toast("Error submitting feedback")
     } finally {
       setIsSubmitting(false)
     }
@@ -504,7 +502,7 @@ export default function CombinedMeetingsTable({ meetings }) {
                     Rating (0-5)
                   </Label>
                   <div className="flex items-center gap-2">
-                    {[0, 1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
                         type="button"

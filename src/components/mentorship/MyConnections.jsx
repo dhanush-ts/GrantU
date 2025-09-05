@@ -290,7 +290,7 @@ export default function MyConnections({ userData, type, act, setShowMyConnection
 
         {/* Meetings Tables */}
         <div className="space-y-6 sm:space-y-8">
-          <CombinedMeetingsTable meetings={meetings} isMentor={isMentor} />
+          <CombinedMeetingsTable meetings={meetings} isMentor={isMentor} fetchMeetings={fetchMeetings} />
         </div>
 
         {/* Profile Modal */}

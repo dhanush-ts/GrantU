@@ -70,23 +70,32 @@ const VerifyOtpPage = () => {
   }
 
   const handleResendOtp = async () => {
-    setIsResending(true)
-    setError("")
-    setMessage("")
+  setIsResending(true)
+  setError("")
+  setMessage("")
 
-    try {
-      // Dummy API call - replace with actual resend endpoint
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+  try {
+    const res = await fetchWithAuth(`/auth/resend-otp/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    })
 
-      setMessage("OTP sent successfully!")
-      setResendTimer(60) // 60 second cooldown
-      setTimeout(() => setMessage(""), 3000)
-    } catch (err) {
-      setError("Failed to resend OTP. Please try again.")
-    } finally {
-      setIsResending(false)
-    }
+    const data = await res.json()
+
+    if (!res.ok) throw new Error(data.error || "Failed to resend OTP")
+
+    setMessage("OTP sent successfully!")
+    setResendTimer(60) // 60 second cooldown
+    setTimeout(() => setMessage(""), 3000)
+  } catch (err) {
+    setError(err.message)
+  } finally {
+    setIsResending(false)
   }
+}
 
   return (
     <div className="flex justify-center items-center px-4 mx-auto max-w-7xl min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600">

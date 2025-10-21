@@ -107,7 +107,8 @@ const LoginModal = ({ open, onOpenChange, onLoginSuccess }) => {
 
           <Button className="mx-auto w-full" asChild>
             <a
-              href={`http://localhost:8000/api/auth/google-login?next=${encodeURIComponent(window.location.href)}`}
+              href={`https://aibackend-preprod.grantu.education/api/auth/google-login?next=${encodeURIComponent(window.location.href)}`}
+              // href={`http://localhost:8000/api/auth/google-login?next=${encodeURIComponent(window.location.href)}`}
               className="flex items-center justify-center mx-auto gap-3 px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-md hover:bg-gray-50 transition duration-200"
             >
               <img

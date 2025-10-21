@@ -1,6 +1,7 @@
 import { toast } from "sonner";
 
-export const api = "http://localhost:8000/api";
+// export const api = "http://localhost:8000/api";
+export const api = "https://aibackend-preprod.grantu.education/api";
 
 export const fetchWithAuth = async (url, options = {}) => {
   const token = localStorage.getItem("authToken");
